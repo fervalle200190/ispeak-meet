@@ -1,9 +1,16 @@
-import "./App.css";
+import React from "react";
+import { Route, Switch } from "wouter";
+
+import DashboardPage from './pages/Dashboard';
+import CoursesPage from './pages/Courses';
+
 import { AsideNav } from "./components/aside/AsideNav";
 import CourseListSection from "./components/CourseListSection";
-import { Header } from "./components/Header.js";
+import Header from "./components/Header.js";
 import placeholder from "./assets/placeholder.png";
 import DashboardSection from "./components/DashboardSection";
+
+import "./App.css";
 
 const MY_COURSES = [
   {
@@ -46,6 +53,10 @@ function App() {
       <AsideNav />
       <main className="w-full pl-60">
         <Header />
+        <Switch>
+          <Route component={DashboardPage} path="/" />
+          <Route component={CoursesPage} path="/courses" />
+        </Switch>
         <div className="max-w-7xl">
           <DashboardSection />
           <CourseListSection title="Your Courses." courses={MY_COURSES} />
