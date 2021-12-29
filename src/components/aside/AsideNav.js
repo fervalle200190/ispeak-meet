@@ -1,14 +1,14 @@
-import {ReactComponent as DashboardIcon} from './assets/dashboard.svg';
-import {ReactComponent as CoursesIcon} from './assets/myCourses.svg';
-import {ReactComponent as MaterialsIcon} from './assets/additionalMaterial.svg';
-import {ReactComponent as CommunityIcon} from './assets/community.svg';
-import {ReactComponent as MatchesIcon} from './assets/myMatches.svg';
-import {ReactComponent as ProfileIcon} from './assets/profile.svg';
+import {ReactComponent as DashboardIcon} from '../../assets/dashboard.svg';
+import {ReactComponent as CoursesIcon} from '../../assets/myCourses.svg';
+import {ReactComponent as MaterialsIcon} from '../../assets/additionalMaterial.svg';
+import {ReactComponent as CommunityIcon} from '../../assets/community.svg';
+import {ReactComponent as MatchesIcon} from '../../assets/myMatches.svg';
+import {ReactComponent as ProfileIcon} from '../../assets/profile.svg';
 import { AsideNavItem } from './AsideNavItem';
 
 export const AsideNav = () => {
   return (
-    <aside className="flex flex-col w-64 bg-gradient-to-b from-primary to-black">
+    <aside className="flex flex-col fixed h-screen w-60 bg-gradient-to-b from-primary to-black">
       <header className="mb-4 p-2 text-center">
         <a href className=" text-5xl text-white font-light">
           i.speak

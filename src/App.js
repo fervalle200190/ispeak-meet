@@ -1,35 +1,56 @@
-import './App.css';
-import { AsideNav } from './AsideNav';
-import { Header } from './Header.js'
+import "./App.css";
+import { AsideNav } from "./components/aside/AsideNav";
+import CourseListSection from "./components/CourseListSection";
+import { Header } from "./components/Header.js";
+import placeholder from "./assets/placeholder.png";
+import DashboardSection from "./components/DashboardSection";
+
+const MY_COURSES = [
+  {
+    id: 0,
+    title: "Adobe After Effects: How to start",
+    author: "ispeak",
+    duration: "1h 13m",
+    students: "39416",
+    thumbnail: `${placeholder}`,
+  },
+  {
+    id: 1,
+    title: "Communication Skill: Become more clear & confident",
+    author: "ispeak",
+    duration: "1h 25m",
+    students: "15236",
+    thumbnail: `${placeholder}`,
+  },
+  {
+    id: 2,
+    title: "Photoshop: from beginner to expert",
+    author: "ispeak",
+    duration: "4h 30m",
+    students: "20221",
+    thumbnail: `${placeholder}`,
+  },
+  {
+    id: 3,
+    title: "Illustrator: from beginner to expert",
+    author: "ispeak",
+    duration: "10h 11m",
+    students: "5365",
+    thumbnail: `${placeholder}`,
+  },
+];
 
 function App() {
   return (
-    <div className='App flex'>
-      
+    <div className="App flex">
       <AsideNav />
-      <main className='w-full'>
+      <main className="w-full pl-60">
         <Header />
-        <section className='flex p-5 gap-8 justify-center'>
-          <div className='h-72 w-[30rem] rounded-3xl bg-primary'></div>
-          <div className='h-72 w-96 rounded-3xl bg-primary'></div>
-        </section>
-        <section className='flex flex-col gap-5 p-5'>
-          <div className='flex gap-5'>
-            <h2>
-              Your Courses
-            </h2>
-            <a href className='py-1 px-2 text-xs text-primary bg-accent rounded-lg'>
-              Browse All
-            </a>
-          </div>
-          <ul>
-            <li>
-              <div className='flex flex-col h-52 w-52 bg-gray-100 rounded-3xl'>
-                <img href='./assets/placeholder' className='h-26 w-full' alt=''></img>
-              </div>
-            </li>
-          </ul>          
-        </section>
+        <div className="max-w-7xl">
+          <DashboardSection />
+          <CourseListSection title="Your Courses." courses={MY_COURSES} />
+          <CourseListSection title="Recommended Courses." courses={MY_COURSES} />
+        </div>
       </main>
     </div>
   );
