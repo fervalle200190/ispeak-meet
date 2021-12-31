@@ -3,21 +3,23 @@ import { Route, Switch } from "wouter";
 
 import DashboardPage from './pages/Dashboard';
 import CoursesPage from './pages/Courses';
+import CoursePage from "./pages/Course";
 
-import AsideNav from './components/AsideNav';
-import Header from "./components/Header.js";
+import SideBar from "./components/SideBar";
+import Header from "./components/Header";
 
 import "./App.css";
 
 function App() {
   return (
     <div className="App flex">
-      <AsideNav />
-      <main className="w-full pl-60">
+      {/* <SideBar /> */}
+      <main className="w-full">
         <Header />
         <Switch>
           <Route component={DashboardPage} path="/" />
           <Route component={CoursesPage} path="/courses" />
+          <Route component={CoursePage} path="/courses/:courseName" />
         </Switch>
       </main>
     </div>

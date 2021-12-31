@@ -1,7 +1,9 @@
-export default function ListCard({id = 0, title, author, duration, students, thumbnail}) {
+import React from "react";
+import { Link } from "wouter";
+
+export default function ListCard({id = 0, title, author, duration, students, thumbnail, url = ''}) {
   return (
-    <li>
-      <div className="flex flex-col w-64 bg-white shadow-md rounded-xl">
+    <Link href={`/courses/${title}`} className="transition ease-in-out delay-[50ms] flex flex-col w-64 bg-white shadow-md rounded-xl hover:shadow-xl hover:scale-[1.01]">
         <div>
           <img src={thumbnail} alt="" className="rounded-3xl object-cover" />
         </div>
@@ -16,7 +18,6 @@ export default function ListCard({id = 0, title, author, duration, students, thu
             <span>{duration}</span>
           </div>
         </div>
-      </div>
-    </li>
+    </Link>
   );
 }
