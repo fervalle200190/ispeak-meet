@@ -13,8 +13,8 @@ import "./App.css";
 function App() {
   return (
     <div className="App flex">
-      {/* <SideBar /> */}
-      <main className="w-full">
+      <SideBar />
+      <main className="w-full pl-60">
         <Header />
         <Switch>
           <Route component={DashboardPage} path="/" />

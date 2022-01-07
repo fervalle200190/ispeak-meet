@@ -23,27 +23,27 @@ const NAV_ITEMS = [
     ),
     url: "",
   },
-  {
-    title: "Community",
-    icon: (
-      <SideNavIcons name='community' />
-    ),
-    url: "",
-  },
-  {
-    title: "Matches",
-    icon: (
-      <SideNavIcons name='matches' />
-    ),
-    url: "",
-  },
-  {
-    title: "Profile",
-    icon: (
-      <SideNavIcons name='profile' />
-    ),
-    url: "",
-  },
+  // {
+  //   title: "Community",
+  //   icon: (
+  //     <SideNavIcons name='community' />
+  //   ),
+  //   url: "",
+  // },
+  // {
+  //   title: "Matches",
+  //   icon: (
+  //     <SideNavIcons name='matches' />
+  //   ),
+  //   url: "",
+  // },
+  // {
+  //   title: "Profile",
+  //   icon: (
+  //     <SideNavIcons name='profile' />
+  //   ),
+  //   url: "",
+  // },
 ];
 
 export default function SideNav() {

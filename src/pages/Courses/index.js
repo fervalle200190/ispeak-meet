@@ -8,7 +8,7 @@ import placeholder from "../../assets/placeholder.png"
 const MY_COURSES = [
   {
     id: 0,
-    title: "Adobe After Effects: How to start",
+    title: "Curso de ingles",
     author: "ispeak",
     duration: "1h 13m",
     students: "39416",
@@ -32,6 +32,14 @@ const MY_COURSES = [
   },
   {
     id: 3,
+    title: "Illustrator: from beginner to expert",
+    author: "ispeak",
+    duration: "10h 11m",
+    students: "5365",
+    thumbnail: `${placeholder}`,
+  },
+  {
+    id: 4,
     title: "Illustrator: from beginner to expert",
     author: "ispeak",
     duration: "10h 11m",
