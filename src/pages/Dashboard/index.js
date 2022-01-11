@@ -1,52 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import DashboardSection from "../../components/DashboardSection";
-import CourseListSection from "../../components/CourseListSection";
+import DashboardSection from "components/DashboardSection";
+import CourseListSection from "components/CoursesSection";
 
-import placeholder from "../../assets/placeholder.png"
+import getCoursesById from "services/getCoursesById";
+import getAllCourses from "services/getAllCourses";
 
-const MY_COURSES = [
-  {
-    id: 0,
-    title: "Adobe After Effects: How to start",
-    author: "ispeak",
-    duration: "1h 13m",
-    students: "39416",
-    thumbnail: `${placeholder}`,
-  },
-  {
-    id: 1,
-    title: "Communication Skill: Become more clear & confident",
-    author: "ispeak",
-    duration: "1h 25m",
-    students: "15236",
-    thumbnail: `${placeholder}`,
-  },
-  {
-    id: 2,
-    title: "Photoshop: from beginner to expert",
-    author: "ispeak",
-    duration: "4h 30m",
-    students: "20221",
-    thumbnail: `${placeholder}`,
-  },
-  {
-    id: 3,
-    title: "Illustrator: from beginner to expert",
-    author: "ispeak",
-    duration: "10h 11m",
-    students: "5365",
-    thumbnail: `${placeholder}`,
-  },
-];
+// import placeholder from "assets/placeholder.png"
 
 export default function DashboardPage() {
+  const [myCourses, setMyCourses] = useState([])
+  const [allCourses, setAllCourses] = useState([])
+
+  useEffect(() => {
+    getCoursesById().then(courses => setMyCourses(courses))
+    getAllCourses().then(courses => setAllCourses(courses))
+  }, [])
+
   return (
     <>
       <div className="max-w-7xl">
         <DashboardSection />
-        <CourseListSection title="Your Courses." courses={MY_COURSES} />
-        <CourseListSection title="Recommended Courses." courses={MY_COURSES} />
+        <CourseListSection title="Your Courses." courses={myCourses} />
+        <CourseListSection title="Recommended Courses." courses={allCourses} />
       </div>
     </>
   );

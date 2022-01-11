@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "wouter";
+import { Route } from "wouter";
 
 import DashboardPage from './pages/Dashboard';
 import CoursesPage from './pages/Courses';
@@ -16,12 +16,12 @@ function App() {
       <SideBar />
       <main className="w-full pl-60">
         <Header />
-        <Switch>
-          <Route component={DashboardPage} path="/" />
-          <Route component={CoursesPage} path="/courses" />
-          <Route component={CoursePage} path="/courses/:courseName" />
-        </Switch>
+        <Route component={DashboardPage} path="/" />
+        <Route component={CoursesPage} path="/courses" />
+        <Route component={CoursePage} path="/courses/:courseName" />
       </main>
+
+      <h1>Test</h1>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import CoursesIcons from "../CoursesIcons";
+import CoursesIcons from "components/CoursesIcons";
 
 export default function CoursesHeader () {
   return <>

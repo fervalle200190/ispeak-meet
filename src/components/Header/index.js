@@ -1,7 +1,7 @@
 import React from "react";
 
-import HeaderIcons from "../HeaderIcons";
-import HeaderSearchBar from "../HeaderSearchBar";
+import HeaderIcons from "components/HeaderIcons";
+import HeaderSearchBar from "components/HeaderSearchBar";
 
 export default function Header() {
   return (
