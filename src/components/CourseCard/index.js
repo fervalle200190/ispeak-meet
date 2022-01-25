@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 
-export default function CourseCard({title, students, duration, professor}) {
+export default function CourseCard({id, title, students, duration, professor}) {
     return (
-        <Link href={`/courses/${title}`} className="transition ease-in-out delay-[50ms] flex flex-col w-64 bg-white shadow-md rounded-xl hover:shadow-xl hover:scale-[1.01]">
+        <Link href={`/courses/${id}`} className="transition ease-in-out delay-[50ms] flex flex-col w-64 bg-white shadow-md rounded-xl hover:shadow-xl hover:scale-[1.01]">
         <div>
           {/* <img src={thumbnail} alt="" className="rounded-3xl object-cover" /> */}
         </div>

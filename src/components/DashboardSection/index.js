@@ -1,6 +1,6 @@
-import DashboardResume from "./DashboardResume";
-import DashboardInfo from "./DashboardInfo";
-import placeholder from "../assets/placeholder.png";
+import DashboardResume from "../DashboardResume";
+import DashboardInfo from "../DashboardInfo";
+import placeholder from "assets/placeholder.png";
 
 export default function DashboardSection () {
   return (

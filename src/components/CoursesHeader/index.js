@@ -1,12 +1,12 @@
 import React from "react";
 import CoursesIcons from "components/CoursesIcons";
 
-export default function CoursesHeader () {
+export default function CoursesHeader ({coursesNum}) {
   return <>
     <header className="flex justify-between">
         <div className="flex items-center gap-3">
-        <h2 className="text-primary text-2xl">Your Courses.</h2>
-        <span className="text-gray-400 text-xl">(12)</span>
+        <h2 className="text-primary text-2xl">My Courses.</h2>
+        <span className="text-gray-400 text-xl">({coursesNum})</span>
         </div>
         <form className="flex items-center gap-2">
           <div className="flex items-center h-8 w-40 rounded-lg border border-white bg-white">

@@ -1,6 +1,6 @@
 import { API_URL, USER_ID } from "./settings"
 
-export default function getCoursesById() {
+export default function getCoursesByUserId() {
     const URL = `${API_URL}/Cursos/GetAllByAlumno/${USER_ID}`
 
     return fetch(URL)
@@ -15,8 +15,6 @@ export default function getCoursesById() {
                 const professor = course.profesor
                 return {id, title, students, duration, professor}
             })
-            console.log(data)
-            console.log(courses)
             return courses
         })
 }
