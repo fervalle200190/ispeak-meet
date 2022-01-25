@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import getCoursesById from "services/getCoursesById";
+import getCoursesByUserId from "services/getCoursesByUserId";
 
 import CourseListSection from "components/CoursesSection";
 import CoursesHeader from "components/CoursesHeader";
@@ -23,7 +23,7 @@ export default function CoursesPage () {
   const [myCourses, setMyCourses] = useState([])
 
   useEffect(() => {
-    getCoursesById().then(courses => setMyCourses(courses))
+    getCoursesByUserId().then(courses => setMyCourses(courses))
   }, [])
 
   return <>

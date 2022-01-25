@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "wouter";
-import ReactPlayer from 'react-player/youtube'
+import React, { useState, useEffect } from "react";
+import getCourseById from "services/getCourseById";
+// import { Link } from "wouter";
+// import ReactPlayer from 'react-player/youtube'
 
 
 import "./styles.css"
-import CourseNav from "../../components/CourseNav";
+// import CourseNav from "../../components/CourseNav";
 
 // const COURSE = {
 //   name: "Business Email Writing",
@@ -66,7 +67,15 @@ import CourseNav from "../../components/CourseNav";
 //   ],
 // };
 
-export default function CoursePage() {
+export default function CoursePage({ params }) {
+
+  useEffect(() => {
+    getCourseById({id: 2010}).then(console.log)
+  }, [])
+
+  return (
+    <h1>Course</h1>
+  )
 
   
 

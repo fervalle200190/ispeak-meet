@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import DashboardSection from "components/DashboardSection";
 import CourseListSection from "components/CoursesSection";
 
-import getCoursesById from "services/getCoursesById";
+import getCoursesByUserId from "services/getCoursesByUserId";
 import getAllCourses from "services/getAllCourses";
 
 // import placeholder from "assets/placeholder.png"
@@ -13,7 +13,7 @@ export default function DashboardPage() {
   const [allCourses, setAllCourses] = useState([])
 
   useEffect(() => {
-    getCoursesById().then(courses => setMyCourses(courses))
+    getCoursesByUserId().then(courses => setMyCourses(courses))
     getAllCourses().then(courses => setAllCourses(courses))
   }, [])
 
