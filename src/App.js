@@ -19,11 +19,9 @@ function App() {
         <Header />
         <Route component={DashboardPage} path="/" />
         <Route component={CoursesPage} path="/courses" />
-        <Route component={CoursePage} path="/courses/:id" />
-        <Route component={ClassPage} path="/courses/:id/:class" />
+        <Route component={CoursePage} path="/courses/:courseId" />
+        <Route component={ClassPage} path="/courses/:courseId/:classId" />
       </main>
-
-      <h1>Test</h1>
     </div>
   );
 }

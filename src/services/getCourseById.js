@@ -7,7 +7,7 @@ export default function getCourseById({id}) {
         .then(response => response.json())
         .then(response => {
             const data = response
-            const course = data.filter(course => course.id === id)
+            const course = data.filter(course => course.id === parseInt(id))
             console.log(course[0])
             return course[0]
         })
