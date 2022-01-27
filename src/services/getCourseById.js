@@ -8,6 +8,7 @@ export default function getCourseById({id}) {
         .then(response => {
             const data = response
             const course = data.filter(course => course.id === id)
-            return course
+            console.log(course[0])
+            return course[0]
         })
 }

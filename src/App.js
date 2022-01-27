@@ -4,6 +4,7 @@ import { Route } from "wouter";
 import DashboardPage from './pages/Dashboard';
 import CoursesPage from './pages/Courses';
 import CoursePage from "./pages/Course";
+import ClassPage from "./pages/Class"; 
 
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
@@ -18,7 +19,8 @@ function App() {
         <Header />
         <Route component={DashboardPage} path="/" />
         <Route component={CoursesPage} path="/courses" />
-        <Route component={CoursePage} path="/courses/:courseName" />
+        <Route component={CoursePage} path="/courses/:id" />
+        <Route component={ClassPage} path="/courses/:id/:class" />
       </main>
 
       <h1>Test</h1>

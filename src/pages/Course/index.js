@@ -3,8 +3,7 @@ import getCourseById from "services/getCourseById";
 // import { Link } from "wouter";
 // import ReactPlayer from 'react-player/youtube'
 
-
-import "./styles.css"
+import "./styles.css";
 // import CourseNav from "../../components/CourseNav";
 
 // const COURSE = {
@@ -67,17 +66,45 @@ import "./styles.css"
 //   ],
 // };
 
-export default function CoursePage({ params }) {
+function Module({ modules = [] }) {
+  return modules.map((module) => (
+    <li className="bg-white p-5 rounded-xl shadow-md">
+      <div>
+        <h2 className="text-lg font-semibold font-Barlow text-primary mr-5 text-center">
+          {module.nombre}
+        </h2>
+        <ol className="">
+          {module.clases.map((clase) => (
+            <li>
+              <div className="flex flex-col items-center content-center">
+                <h3 className="text-md font-Barlow text-primary mr-5 text-center">{clase.nombre}</h3>
+                <img src={clase.thumbnails} alt={clase.nombre} className=" aspect-video max-h-96" />
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </li>
+  ));
+}
 
+export default function CoursePage({ params }) {
+  const id = parseInt(params.id);
+  const [course, setCourse] = useState({});
   useEffect(() => {
-    getCourseById({id: 2010}).then(console.log)
-  }, [])
+    getCourseById({ id: id }).then((course) => setCourse(course));
+  }, [id]);
 
   return (
-    <h1>Course</h1>
-  )
-
-  
+    <section className="p-5">
+      <h1 className="text-2xl font-semibold font-Barlow text-primary mr-5">
+        {course.nombre}
+      </h1>
+      <ol className="p-5 flex flex-col gap-2">
+        {<Module modules={course.modulos} />}
+      </ol>
+    </section>
+  );
 
   // return (
   //   <section className="bg-primary flex gap-1 pt-5 px-5 w-ful text-white">

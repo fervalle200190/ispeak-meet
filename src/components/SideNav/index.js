@@ -16,7 +16,7 @@ const NAV_ITEMS = [
     icon: (
       <SideNavIcons name='courses' />
     ),
-    url: "courses",
+    url: "/courses",
   },
   {
     id: 2,
