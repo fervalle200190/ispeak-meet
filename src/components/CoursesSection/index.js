@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import CoursesList from "components/CoursesList";
 
-export default function CourseListSection({title, courses}) {
+export default function CourseListSection({title, courses, link}) {
 
   return (
     <section className="flex flex-col gap-5 py-5 px-10 w-full">
@@ -13,7 +13,7 @@ export default function CourseListSection({title, courses}) {
             {title}
           </h2>
           <Link
-            href
+            href={link}
             className="py-1 px-2 text-sm text-primary bg-accent rounded-xl font-medium"
           >
             Browse All

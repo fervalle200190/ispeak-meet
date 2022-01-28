@@ -21,8 +21,8 @@ export default function DashboardPage() {
     <>
       <div className="max-w-7xl">
         <DashboardSection />
-        <CourseListSection title="Your Courses." courses={myCourses} />
-        <CourseListSection title="Recommended Courses." courses={allCourses} />
+        <CourseListSection title="Your Courses." courses={myCourses} link="/courses"/>
+        <CourseListSection title="Recommended Courses." courses={allCourses} link="/" />
       </div>
     </>
   );
