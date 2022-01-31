@@ -92,7 +92,7 @@ export default function MaterialPage({ params }) {
 
   return (
     <>
-      <section className="bg-primary flex pt-5 px-5 w-ful text-white">
+      <section className="max-h-[60vh] bg-primary flex pt-5 px-5 w-full text-white">
         <div className="w-1/4">
           <header className="pl-5 flex flex-col gap-5 mb-5">
             <Link href="/courses">{`<`} My classes</Link>
@@ -101,11 +101,11 @@ export default function MaterialPage({ params }) {
           </header>
           <CourseNav courseId={courseId} units={course.modulos} />
         </div>
-        <div className="w-3/4 px-10 py-5 flex flex-col gap-5">
+        <div className="w-3/4 px-10 py-5 flex flex-col items-center gap-5 h-full">
           <ReactPlayer
             url={material.linkVideo}
-            height="100"
-            width="100%"
+            height="75%"
+            width="75%"
             controls
             className="aspect-video overflow-hidden rounded-3xl"
           />
