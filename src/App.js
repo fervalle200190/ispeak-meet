@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from "wouter";
 
 import LoginPage from "pages/Login";
@@ -13,18 +13,32 @@ import Header from "./components/Header";
 import "./App.css";
 
 function App() {
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+  const loggedUserJson = localStorage.getItem('loggedAppUser')
+  if(loggedUserJson) {
+    const user = JSON.parse(loggedUserJson)
+    setUser(user)
+  }
+  }, [])
+
   return (
-    <div className="App flex">
-      <SideBar />
-      <main className="w-full pl-60">
-        <Header />
-        <Route component={LoginPage} path="/login" />
-        <Route component={DashboardPage} path="/" />
-        <Route component={CoursesPage} path="/courses" />
-        <Route component={CoursePage} path="/courses/:courseId" />
-        <Route component={MaterialPage} path="/courses/:courseId/:classId" />
-      </main>
-    </div>
+    <>
+      { 
+      !user
+      ? <Route component={LoginPage} path="/" />
+      : <div className="App flex">
+        <SideBar />
+        <main className="w-full pl-60">
+          <Header user={user} />
+          <Route component={DashboardPage} path="/" />
+          <Route component={CoursesPage} path="/courses" />
+          <Route component={CoursePage} path="/courses/:courseId" />
+          <Route component={MaterialPage} path="/courses/:courseId/:classId" />
+        </main>
+      </div>
+      }
+    </>
   );
 }
 
