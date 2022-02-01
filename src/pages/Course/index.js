@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import getCourseById from "services/getCourseById";
 
 import "./styles.css";
+import CourseIcons from "components/CourseIcons";
 
 function AccordionItem({ course, module }) {
   const [isActive, setActive] = useState(false);
@@ -13,13 +14,13 @@ function AccordionItem({ course, module }) {
       className="bg-white p-5 rounded-xl shadow-md accordion-item"
     >
       <div
-        className="flex content-between w-full"
+        className="flex justify-between items-center w-full"
         onClick={() => setActive(!isActive)}
       >
         <h2 className="text-lg font-semibold font-Barlow text-primary mr-5 text-center accordion-title">
           {module.nombre}
         </h2>
-        <div>{isActive ? "-" : "+"}</div>
+        {isActive ? <CourseIcons name="minus" /> : <CourseIcons name="plus" />}
       </div>
       {isActive && (
         <ol className="accordion-content">

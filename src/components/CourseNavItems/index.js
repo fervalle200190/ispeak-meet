@@ -9,12 +9,12 @@ export default function CourseNavItems({ courseId, materials = [] }) {
         materials.map(material => {
           return ( material.completada ?
             <li key={material.id} className="flex items-center p-2 text-gray-500 justify-between">
-            <div className="flex gap-3 items-center">
+            <Link className="flex gap-3 items-center" href={`/courses/${courseId}/${material.id}`}>
               <div className="h-8 min-w-[2rem] bg-accent rounded-full flex items-center justify-center">
                 <CourseIcons name="check" />
               </div>
               <h4 className="font-semibold">{material.nombre}</h4>
-            </div>
+            </Link>
             {/* <span>{cls.video.duration}</span> */}
           </li>
           :

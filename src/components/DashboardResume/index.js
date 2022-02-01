@@ -1,3 +1,5 @@
+import DashboardIcons from "components/DashboardIcons";
+
 export default function DashboardResume({title, duration, thumbnail, url}) {
   return (
     <div className="h-[26rem] w-[40rem] rounded-3xl bg-primary">
@@ -6,7 +8,7 @@ export default function DashboardResume({title, duration, thumbnail, url}) {
           {title}
         </h3>
         <div className="rounded-full h-10 w-10 bg-white/50 text-white z-20 p-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-          <a href>{">"}</a>
+          <a href><DashboardIcons name="play" /></a>
         </div>
         <div className="absolute top-0 left-0 h-full w-full bg-black opacity-20 z-10 rounded-t-3xl rounded-bl-[2rem]"></div>
         <img

@@ -28,8 +28,8 @@ function App() {
       !user
       ? <Route component={LoginPage} path="/" />
       : <div className="App flex">
-        <SideBar />
-        <main className="w-full pl-60">
+        {/* <SideBar /> */}
+        <main className="w-full">
           <Header user={user} />
           <Route component={DashboardPage} path="/" />
           <Route component={CoursesPage} path="/courses" />

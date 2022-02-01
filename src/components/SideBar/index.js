@@ -7,7 +7,7 @@ export default function SideBar() {
       <aside className="flex flex-col fixed h-screen w-60 bg-primary">
         <header className="mb-4 p-2 text-center">
           <a href className=" text-5xl text-white font-light">
-            i.speak
+            i<span className="text-accent">.</span>speak
           </a>
         </header>
         <SideNav />

@@ -14,8 +14,6 @@ export default function getAllCourses() {
                 const professor = course.profesor
                 return {id, title, students, duration, professor}
             })
-            console.log(data)
-            console.log(courses)
             return courses
     })
 }

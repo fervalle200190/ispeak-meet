@@ -9,16 +9,13 @@ export default function login({email, password}) {
   }
 
   return fetch(URL, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(credentials)})
-    .then(response => response.json())
-    .then(response => { 
+    .then(response => {
+      if(response.status === 400) return false
+      return response.json()})
+    .then(response => {
+      if(response === false) return false 
       const data = response
-      console.log(data)
-      if(Object.keys(data).filter(key => key === 'token')) {
-        console.log(true)
-        window.localStorage.setItem('loggedAppUser', JSON.stringify(data))
-        return data
-      }
-
+      window.localStorage.setItem('loggedAppUser', JSON.stringify(data))
       return data
     })
 }
