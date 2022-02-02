@@ -34,7 +34,7 @@ function App() {
           <Route component={DashboardPage} path="/" />
           <Route component={CoursesPage} path="/courses" />
           <Route component={CoursePage} path="/courses/:courseId" />
-          <Route component={MaterialPage} path="/courses/:courseId/:classId" />
+          <Route component={MaterialPage} path="/courses/:courseId/:moduleId/:materialId" />
         </main>
       </div>
       }

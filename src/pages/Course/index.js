@@ -6,8 +6,9 @@ import getCourseById from "services/getCourseById";
 import "./styles.css";
 import CourseIcons from "components/CourseIcons";
 
-function AccordionItem({ course, module }) {
+function AccordionItem({ course, module, index }) {
   const [isActive, setActive] = useState(false);
+
   return (
     <li
       key={module.id}
@@ -17,27 +18,39 @@ function AccordionItem({ course, module }) {
         className="flex justify-between items-center w-full"
         onClick={() => setActive(!isActive)}
       >
+      <div className="flex items-center">
         <h2 className="text-lg font-semibold font-Barlow text-primary mr-5 text-center accordion-title">
           {module.nombre}
         </h2>
+        <span>({index+1})</span>
+      </div>
+        
         {isActive ? <CourseIcons name="minus" /> : <CourseIcons name="plus" />}
       </div>
       {isActive && (
-        <ol className="accordion-content">
-          {module.clases.map((clase) => (
-            <li key={clase.id}>
+        <ol className="accordion-content mt-10">
+          {module.clases.map((clase, index) => (
+            <li key={clase.id} className="border-t-[1px] border-gray-200">
               <Link
-                className="flex flex-col items-center content-center"
-                href={`/courses/${course}/${clase.id}`}
+                className="flex items-center content-center p-5 gap-5"
+                href={`/courses/${course}/${module.id}/${clase.id}`}
               >
-                <h3 className="text-md font-Barlow text-primary mr-5 text-center">
-                  {clase.nombre}
-                </h3>
                 <img
                   src={clase.thumbnails}
                   alt={clase.nombre}
-                  className=" aspect-video max-h-96"
+                  className="aspect-video max-h-40 rounded-3xl border-[1px] border-accent"
                 />
+                <div className="flex flex-col">
+                  <h3 className="text-md font-semibold font-Barlow text-primary mr-5">
+                    {index+1}. {clase.nombre}
+                  </h3>
+                  { 
+                  clase.completada ?
+                    <span className="text-accent">Complete</span>
+                  :
+                    <></>
+                  }
+                </div>
               </Link>
             </li>
           ))}
@@ -48,8 +61,8 @@ function AccordionItem({ course, module }) {
 }
 
 function Module({ course, modules = [] }) {
-  return modules.map((module) => (
-    <AccordionItem course={course} module={module} />
+  return modules.map((module, index) => (
+    <AccordionItem key={module.id} course={course} module={module} index={index} />
   ));
 }
 

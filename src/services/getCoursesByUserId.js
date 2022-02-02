@@ -1,6 +1,7 @@
-import { API_URL, USER_ID } from "./settings"
+import { API_URL } from "./settings"
 
 export default function getCoursesByUserId() {
+    const USER_ID = JSON.parse(localStorage.getItem('loggedAppUser')).id
     const URL = `${API_URL}/Cursos/GetAllByAlumno/${USER_ID}`
 
     return fetch(URL)

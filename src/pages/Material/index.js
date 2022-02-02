@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import ReactPlayer from "react-player/vimeo";
 
 import getCourseById from "services/getCourseById";
@@ -72,7 +72,7 @@ function Comment({ comment }) {
 
 function CommentsList({ comments = [] }) {
   return comments.map((comment) => {
-    return <Comment comment={comment} />;
+    return <Comment key={comment.id} comment={comment} />;
   });
 }
 
@@ -94,21 +94,30 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   );
 }
 
-function handleNextClass() {
-  
-}
 
 export default function MaterialPage({ params }) {
-  const { courseId, classId } = params;
+  const { courseId, moduleId, materialId } = params;
   const [course, setCourse] = useState({});
   const [material, setMaterial] = useState({});
   const [isActive, setIsActive] = useState({ about: true, comments: false });
-
+  const [location, setLocation] = useLocation()
+  
   useEffect(() => {
     getCourseById({ id: courseId }).then((course) => setCourse(course));
-    getMaterialById({ id: classId }).then((material) => setMaterial(material));
+    getMaterialById({ id: materialId }).then((material) => setMaterial(material));
     setIsActive({ about: true, comments: false });
-  }, [classId, courseId]);
+  }, [materialId, courseId]);
+  
+  function handleNextClass() {
+    // const moduleI = parseInt(moduleId)
+    // const materialI = parseInt(materialId)
+    // const modules = course.modulos
+    // const currentModule = modules.find(({id}) => id === moduleI)
+    // const currentMaterial = currentModule.clases.find(({id}) => id === materialI)
+    // const nextMaterial = currentModule.clases.find(({id}) => id === materialI+1)
+    console.log()
+    // setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`)
+  }
 
   return (
     <>
@@ -139,7 +148,7 @@ export default function MaterialPage({ params }) {
             </h1>
             <button
               className="p-2 w-40 text-primary bg-accent rounded-3xl"
-              onClick={() => {handleNextClass()}}
+              onClick={() => handleNextClass()}
             >
               next class
             </button>
