@@ -94,29 +94,37 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   );
 }
 
-
 export default function MaterialPage({ params }) {
   const { courseId, moduleId, materialId } = params;
   const [course, setCourse] = useState({});
   const [material, setMaterial] = useState({});
   const [isActive, setIsActive] = useState({ about: true, comments: false });
-  const [location, setLocation] = useLocation()
-  
+  const [location, setLocation] = useLocation();
+
   useEffect(() => {
     getCourseById({ id: courseId }).then((course) => setCourse(course));
-    getMaterialById({ id: materialId }).then((material) => setMaterial(material));
+    getMaterialById({ id: materialId }).then((material) =>
+      setMaterial(material)
+    );
     setIsActive({ about: true, comments: false });
   }, [materialId, courseId]);
-  
+
   function handleNextClass() {
-    // const moduleI = parseInt(moduleId)
-    // const materialI = parseInt(materialId)
-    // const modules = course.modulos
-    // const currentModule = modules.find(({id}) => id === moduleI)
-    // const currentMaterial = currentModule.clases.find(({id}) => id === materialI)
-    // const nextMaterial = currentModule.clases.find(({id}) => id === materialI+1)
-    console.log()
-    // setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`)
+    const moduleI = parseInt(moduleId);
+    const materialI = parseInt(materialId);
+    const currentModule = course.modulos.find(({ id }) => id === moduleI);
+
+    if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
+      const nextMaterial = currentModule.clases.find(
+        ({ id }) => id === materialI + 1);
+      setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`);
+    } else {
+      const nextModule = course.modulos.find(
+        ({ id }) => id === moduleI + 1);
+      setLocation(
+        `/courses/${courseId}/${nextModule.id}/${nextModule.clases[0].id}`
+      );
+    }
   }
 
   return (
