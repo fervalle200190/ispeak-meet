@@ -11,6 +11,16 @@ import CourseIcons from "components/CourseIcons";
 
 import "./styles.css";
 
+function MaterialContentSection({ courseId, course, isActive = false }) {
+  return isActive ? (
+    <section className="flex w-full items-center justify-center p-10">
+      <CourseNav courseId={courseId} units={course.modulos} />
+    </section>
+  ) : (
+    <></>
+  );
+}
+
 function MaterialAboutSection({ isActive = true }) {
   return isActive ? (
     <div className="w-full">
@@ -25,7 +35,7 @@ function Replys({ reply }) {
   return (
     <div
       key={reply.id}
-      className="ml-5 border-[1px] rounded-xl border-accent p-5 mt-5"
+      className="ml-5 mt-5 rounded-xl border border-accent p-5"
     >
       <header className="flex justify-between border-b-2 border-accent">
         <div>
@@ -44,7 +54,7 @@ function Comment({ comment }) {
   return (
     <div
       key={comment.id}
-      className="border-[1px] border-gray-400 rounded-xl p-5 max-w-3xl"
+      className="w-full max-w-3xl rounded-xl border border-gray-400 p-5"
     >
       <header className="flex justify-between border-b-4 border-accent p-2">
         <div>
@@ -54,9 +64,9 @@ function Comment({ comment }) {
         <span>{comment.fecha}</span>
       </header>
       <p className="p-2">{comment.comentario}</p>
-      <button className="font-semibold text-primary pl-5">reply</button>
+      <button className="pl-5 font-semibold text-primary">reply</button>
       <button
-        className="font-semibold text-primary pl-5"
+        className="pl-5 font-semibold text-primary"
         onClick={() => setIsActive(!isActive)}
       >
         comments ({comment.respuestas.length})
@@ -86,7 +96,7 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   }, [isActive, materialId]);
 
   return isActive ? (
-    <div className="w-full flex flex-col items-center p-10 gap-5">
+    <div className="flex w-full flex-col items-center gap-5 p-10">
       <CommentsList comments={comments} />
     </div>
   ) : (
@@ -98,7 +108,11 @@ export default function MaterialPage({ params }) {
   const { courseId, moduleId, materialId } = params;
   const [course, setCourse] = useState({});
   const [material, setMaterial] = useState({});
-  const [isActive, setIsActive] = useState({ about: true, comments: false });
+  const [isActive, setIsActive] = useState({
+    about: true,
+    comments: false,
+    content: false,
+  });
   const [location, setLocation] = useLocation();
 
   useEffect(() => {
@@ -109,18 +123,18 @@ export default function MaterialPage({ params }) {
     setIsActive({ about: true, comments: false });
   }, [materialId, courseId]);
 
-  function handleNextClass() {
+  function handleNextMaterial() {
     const moduleI = parseInt(moduleId);
     const materialI = parseInt(materialId);
     const currentModule = course.modulos.find(({ id }) => id === moduleI);
 
     if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
       const nextMaterial = currentModule.clases.find(
-        ({ id }) => id === materialI + 1);
+        ({ id }) => id === materialI + 1
+      );
       setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`);
     } else {
-      const nextModule = course.modulos.find(
-        ({ id }) => id === moduleI + 1);
+      const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
       setLocation(
         `/courses/${courseId}/${nextModule.id}/${nextModule.clases[0].id}`
       );
@@ -129,34 +143,32 @@ export default function MaterialPage({ params }) {
 
   return (
     <>
-      <section className="max-h-[70vh] bg-primary flex py-10 px-10 w-full text-white overflow-hidden gap-10">
-        <div className="w-1/3 max-h-[70vh]">
-          <header className="max-h-[20vh] pl-5 flex flex-col gap-5">
+      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-primary text-white md:p-10">
+        <div className="hidden max-h-[70vh] w-1/3 flex-col md:flex">
+          <header className="flex max-h-[20vh] flex-col gap-5 pl-5">
             <Link href="/courses" className="flex items-center gap-2">
               <CourseIcons name="back" /> My classes
             </Link>
 
-            <h2 className="font-medium text-lg">{course.nombre}</h2>
+            <h2 className="text-lg font-medium">{course.nombre}</h2>
           </header>
           <CourseNav courseId={courseId} units={course.modulos} />
         </div>
-        <div className="w-2/3 pl-5 flex flex-col items-center gap-5 max-h-[70vh] max-w-[50rem]">
-          <div className="rounded-3xl overflow-hidden h-full max-w-full">
-            <ReactPlayer
-              url={material.linkVideo}
-              height="100%"
-              width="100%"
-              controls
-              className="aspect-video"
-            />
-          </div>
-          <div className="flex justify-between items-center w-full">
-            <h1 className="text-2xl font-semibold text-white font-Barlow">
+        <div className="flex max-h-[70vh] w-full max-w-[50rem] flex-col items-center sm:w-2/3 sm:pl-5">
+          <ReactPlayer
+            url={material.linkVideo}
+            height="100%"
+            width="100%"
+            controls
+            className="aspect-video"
+          />
+          <div className="flex w-full items-center justify-between gap-2 p-5">
+            <h1 className="font-Barlow text-2xl font-semibold text-white">
               {material.nombre}
             </h1>
             <button
-              className="p-2 w-40 text-primary bg-accent rounded-3xl"
-              onClick={() => handleNextClass()}
+              className="w-40 rounded-3xl bg-accent p-2 text-primary"
+              onClick={() => handleNextMaterial()}
             >
               next class
             </button>
@@ -167,18 +179,28 @@ export default function MaterialPage({ params }) {
         <header className="h-20 w-full border-b-[1px] border-gray-400 px-10">
           <ul className="flex h-full items-center gap-5">
             <li
-              className=" font-Barlow font-semibold text-lg text-primary hover:border-b-4 border-accent"
-              onClick={() => setIsActive({ about: true, comments: false })}
+              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              onClick={() =>
+                setIsActive({ about: true, comments: false, content: false })
+              }
             >
-              {" "}
-              About{" "}
+              About
             </li>
             <li
-              className=" font-Barlow font-semibold text-lg text-primary hover:border-b-4 border-accent"
-              onClick={() => setIsActive({ about: false, comments: true })}
+              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              onClick={() =>
+                setIsActive({ about: false, comments: true, content: false })
+              }
             >
-              {" "}
-              Comments{" "}
+              Comments
+            </li>
+            <li
+              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              onClick={() =>
+                setIsActive({ about: false, comments: false, content: true })
+              }
+            >
+              Content
             </li>
           </ul>
         </header>
@@ -186,6 +208,11 @@ export default function MaterialPage({ params }) {
         <MaterialCommentsSection
           materialId={material.id}
           isActive={isActive.comments}
+        />
+        <MaterialContentSection
+          courseId={courseId}
+          course={course}
+          isActive={isActive.content}
         />
       </section>
     </>

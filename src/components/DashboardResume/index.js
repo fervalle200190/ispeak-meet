@@ -1,5 +1,6 @@
 import DashboardIcons from "components/DashboardIcons";
 
+
 export default function DashboardResume({title, duration, thumbnail, url}) {
   return (
     <div className="h-[26rem] w-[40rem] rounded-3xl bg-primary">
@@ -17,7 +18,7 @@ export default function DashboardResume({title, duration, thumbnail, url}) {
           className="rounded-bl-[2rem] absolute top-0 left-0 h-full w-full"
         />
       </div>
-      <div className="flex items-center h-1/4 w-full px-10 justify-between">
+      <div className="flex items-center h-1/4 w-full px-10 justify-between flex-wrap">
         <span className="text-white">{duration}</span>
         <a
           href={url}

@@ -30,15 +30,15 @@ function AccordionItem({ course, module, index }) {
       {isActive && (
         <ol className="accordion-content mt-10">
           {module.clases.map((clase, index) => (
-            <li key={clase.id} className="border-t-[1px] border-gray-200">
+            <li key={clase.id} className="border-t border-gray-200">
               <Link
-                className="flex items-center content-center p-5 gap-5"
+                className="flex flex-col md:flex-row items-center content-center p-5 gap-5"
                 href={`/courses/${course}/${module.id}/${clase.id}`}
               >
                 <img
                   src={clase.thumbnails}
                   alt={clase.nombre}
-                  className="aspect-video max-h-40 rounded-3xl border-[1px] border-accent"
+                  className="aspect-video max-h-40 rounded-3xl border border-accent"
                 />
                 <div className="flex flex-col">
                   <h3 className="text-md font-semibold font-Barlow text-primary mr-5">

@@ -32,7 +32,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <form onSubmit={handleLogin} className="flex flex-col gap-5 max-w-md min-w-[24rem] w-4/12 rounded-3xl bg-primary p-10 items-center justify-between h-96">
+      <form onSubmit={handleLogin} className="flex flex-col gap-5 max-w-md min-w-[24rem] w-4/12 rounded-3xl bg-primary p-10 items-center justify-between h-96 shadow-md">
         <h1 className=" text-6xl text-white font-Barlow">i<span className="text-accent">.</span>speak</h1>
         <div className="flex flex-col gap-1">
         <label className="text-white font-Barlow">Email</label>
