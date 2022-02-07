@@ -1,8 +1,11 @@
-import { API_URL } from "./settings"
+import { API_URL } from "./settings";
 
-export default function setMaterialComplete({moduleId, materialId}) {
-  const USER_ID = JSON.parse(localStorage.getItem('loggedAppUser')).id
-  const URL = `${API_URL}/MaterialEstudios/SetMaterialCompletado/${moduleId}/${materialId}/${USER_ID}")`
+export default function setMaterialComplete({ materialId, classNum }) {
+  const USER_ID = JSON.parse(localStorage.getItem("loggedAppUser")).id;
+  console.log(USER_ID);
+  const URL = `${API_URL}/MaterialEstudios/SetMaterialCompletado/${materialId}/${classNum}/${USER_ID}`;
 
-  fetch(URL).then(response => response.json()).then(response => console.log())
+  fetch(URL)
+    .then((response) => response.json())
+    .then((response) => console.log());
 }

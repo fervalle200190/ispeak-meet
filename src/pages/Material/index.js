@@ -10,6 +10,7 @@ import CourseNav from "components/CourseNav";
 import CourseIcons from "components/CourseIcons";
 
 import "./styles.css";
+import setMaterialComplete from "services/setMaterialComplete";
 
 function MaterialContentSection({ courseId, course, isActive = false }) {
   return isActive ? (
@@ -33,10 +34,7 @@ function MaterialAboutSection({ isActive = true }) {
 
 function Replys({ reply }) {
   return (
-    <div
-      key={reply.id}
-      className="ml-5 mt-5 rounded-xl border border-accent p-5"
-    >
+    <div className="ml-5 mt-5 rounded-xl border border-accent p-5">
       <header className="flex justify-between border-b-2 border-accent">
         <div>
           <img url={reply.imagen} alt="" />
@@ -72,7 +70,9 @@ function Comment({ comment }) {
         comments ({comment.respuestas.length})
       </button>
       {isActive ? (
-        comment.respuestas.map((reply) => <Replys reply={reply} />)
+        comment.respuestas.map((reply) => (
+          <Replys key={reply.id} reply={reply} />
+        ))
       ) : (
         <></>
       )}
@@ -132,9 +132,11 @@ export default function MaterialPage({ params }) {
       const nextMaterial = currentModule.clases.find(
         ({ id }) => id === materialI + 1
       );
+      setMaterialComplete({ materialId, classNum: material.claseNumero });
       setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`);
     } else {
       const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
+      setMaterialComplete({ materialId, classNum: material.claseNumero });
       setLocation(
         `/courses/${courseId}/${nextModule.id}/${nextModule.clases[0].id}`
       );
@@ -154,7 +156,7 @@ export default function MaterialPage({ params }) {
           </header>
           <CourseNav courseId={courseId} units={course.modulos} />
         </div>
-        <div className="flex max-h-[70vh] w-full max-w-[50rem] flex-col items-center sm:w-2/3 sm:pl-5">
+        <div className="flex max-h-[70vh] w-full max-w-[50rem] flex-col items-center md:w-2/3 md:pl-5">
           <ReactPlayer
             url={material.linkVideo}
             height="100%"
