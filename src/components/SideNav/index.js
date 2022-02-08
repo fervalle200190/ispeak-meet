@@ -1,29 +1,23 @@
-import AsideNavItem from "../SideNavItem";
+import SideNavItem from "../SideNavItem";
 import SideNavIcons from "../SideNavIcons";
 
 const NAV_ITEMS = [
   {
     id: 0,
     title: "Dashboard",
-    icon: (
-      <SideNavIcons name='dashboard' />
-    ),
+    icon: <SideNavIcons name="dashboard" />,
     url: "/",
   },
   {
     id: 1,
     title: "Courses",
-    icon: (
-      <SideNavIcons name='courses' />
-    ),
+    icon: <SideNavIcons name="courses" />,
     url: "/courses",
   },
   {
     id: 2,
     title: "Material",
-    icon: (
-      <SideNavIcons name='material' />
-    ),
+    icon: <SideNavIcons name="material" />,
     url: "",
   },
   // {
@@ -53,8 +47,8 @@ export default function SideNav() {
   return (
     <>
       <nav className="flex flex-col">
-        {NAV_ITEMS.map(({id, title, icon, url}) => (
-          <AsideNavItem key={id} title={title} icon={icon} url={url} />
+        {NAV_ITEMS.map(({ id, title, icon, url }) => (
+          <SideNavItem key={id} title={title} icon={icon} url={url} />
         ))}
       </nav>
     </>
