@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "wouter";
 
 import HeaderIcons from "components/HeaderIcons";
 import HeaderSearchBar from "components/HeaderSearchBar";
@@ -16,19 +17,31 @@ export default function Header({ user }) {
 
   return (
     <>
-      <header className="flex h-[72px] w-full items-center justify-between bg-white px-10 shadow-sm">
-        <button className="md:hidden" onClick={() => setIsOpen(true)}>
-          <HeaderIcons name="hamburguer" />
-        </button>
-        <HeaderSearchBar />
-        <div className="flex gap-5">
-          <div className="flex items-center">
-            <HeaderIcons name="profile" />
-            <span className="font-medium text-primary">{username}</span>
-          </div>
-          {/* <button onClick={handleLogout} className="text-primary">
+      <header className="flex h-[72px] w-full items-center justify-between bg-white px-10 py-5 shadow-sm">
+        <div className="flex h-full items-center">
+          <button className="md:hidden" onClick={() => setIsOpen(true)}>
+            <HeaderIcons name="hamburguer" />
+          </button>
+          <Link
+            href="/"
+            className=" text-4xl font-light text-primary md:hidden"
+          >
+            i<span className="text-accent">.</span>speak
+          </Link>
+        </div>
+        <div className="flex md:w-full md:justify-between">
+          <HeaderSearchBar />
+          <div className="flex gap-5">
+            <div className="flex items-center">
+              <HeaderIcons name="profile" />
+              <span className="hidden font-medium text-primary md:inline">
+                {username}
+              </span>
+            </div>
+            {/* <button onClick={handleLogout} className="text-primary">
             Logout
           </button> */}
+          </div>
         </div>
       </header>
     </>

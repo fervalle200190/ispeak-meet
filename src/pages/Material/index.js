@@ -14,7 +14,7 @@ import setMaterialComplete from "services/setMaterialComplete";
 
 function MaterialContentSection({ courseId, course, isActive = false }) {
   return isActive ? (
-    <section className="flex w-full items-center justify-center p-10">
+    <section className="flex w-full items-center justify-center p-5 md:p-10">
       <CourseNav courseId={courseId} units={course.modulos} />
     </section>
   ) : (
@@ -145,8 +145,8 @@ export default function MaterialPage({ params }) {
 
   return (
     <>
-      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-primary text-white md:p-10">
-        <div className="hidden max-h-[70vh] w-1/3 flex-col md:flex">
+      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-primary text-white lg:p-10">
+        <div className="hidden max-h-[70vh] w-1/3 flex-col lg:flex">
           <header className="flex max-h-[20vh] flex-col gap-5 pl-5">
             <Link href="/courses" className="flex items-center gap-2">
               <CourseIcons name="back" /> My classes
@@ -156,7 +156,7 @@ export default function MaterialPage({ params }) {
           </header>
           <CourseNav courseId={courseId} units={course.modulos} />
         </div>
-        <div className="flex max-h-[70vh] w-full max-w-[50rem] flex-col items-center md:w-2/3 md:pl-5">
+        <div className="flex max-h-[70vh] w-full max-w-[50rem] flex-col items-center lg:w-2/3 lg:pl-5">
           <ReactPlayer
             url={material.linkVideo}
             height="100%"

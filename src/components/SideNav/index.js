@@ -18,7 +18,7 @@ const NAV_ITEMS = [
     id: 2,
     title: "Material",
     icon: <SideNavIcons name="material" />,
-    url: "",
+    url: "/refuerzo",
   },
   // {
   //   title: "Community",
@@ -34,13 +34,12 @@ const NAV_ITEMS = [
   //   ),
   //   url: "",
   // },
-  // {
-  //   title: "Profile",
-  //   icon: (
-  //     <SideNavIcons name='profile' />
-  //   ),
-  //   url: "",
-  // },
+  {
+    id: 3,
+    title: "Profile",
+    icon: <SideNavIcons name="profile" />,
+    url: "/profile",
+  },
 ];
 
 export default function SideNav() {

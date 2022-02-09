@@ -5,11 +5,11 @@ import HeaderIcons from "../HeaderIcons";
 export default function HeaderSearchBar() {
   return (
     <>
-      <form className="flex items-center h-[36px] w-1/2 rounded-md border border-gray-200">
-        <HeaderIcons name='search' />
+      <form className="flex h-[36px] items-center rounded-md border-gray-200 md:w-1/2 md:border">
+        <HeaderIcons name="search" />
         <input
           type="text"
-          className="px-1 text-xs h-full w-full outline-none"
+          className="hidden h-full w-full px-1 text-xs outline-none md:inline-block"
           placeholder="Search Course or Instructor"
         />
       </form>

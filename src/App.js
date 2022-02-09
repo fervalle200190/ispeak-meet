@@ -6,6 +6,8 @@ import DashboardPage from "./pages/Dashboard";
 import CoursesPage from "./pages/Courses";
 import CoursePage from "./pages/Course";
 import MaterialPage from "./pages/Material";
+import AdditionalMaterialPage from "./pages/AdditionalMaterial";
+import ProfilePage from "pages/Profile";
 
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
@@ -34,7 +36,7 @@ function App() {
           <div className="App flex flex-col items-center md:ml-60">
             <SideBar />
             <Header user={user} />
-            <main className="w-full max-w-7xl">
+            <main className="w-full">
               <Route component={DashboardPage} path="/" />
               <Route component={CoursesPage} path="/courses" />
               <Route component={CoursePage} path="/courses/:courseId" />
@@ -42,6 +44,8 @@ function App() {
                 component={MaterialPage}
                 path="/courses/:courseId/:moduleId/:materialId"
               />
+              <Route component={AdditionalMaterialPage} path="/refuerzo" />
+              <Route component={ProfilePage} path="/profile" />
             </main>
           </div>
         </SideBarContext.Provider>
