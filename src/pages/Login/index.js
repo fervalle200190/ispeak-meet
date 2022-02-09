@@ -66,7 +66,7 @@ export default function LoginPage() {
             Login
             </button>
           :
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         }
       </form>
     </div>

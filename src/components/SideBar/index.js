@@ -3,6 +3,7 @@ import { SideBarContext } from "hooks/sideBarContext";
 import { Link } from "wouter";
 
 import SideNav from "../SideNav";
+import SideNavIcon from "components/SideNavIcons";
 
 export default function SideBar() {
   const { isOpen, setIsOpen } = useContext(SideBarContext);
@@ -24,7 +25,9 @@ export default function SideBar() {
         } duration-300 ease-in-out`}
       >
         <header className="mb-4 p-2 text-center">
-          <button onClick={() => setIsOpen(false)}>X</button>
+          <button onClick={() => setIsOpen(false)}>
+            <SideNavIcon name="close" />
+          </button>
           <Link href="/" className=" text-5xl font-light text-white">
             i<span className="text-accent">.</span>speak
           </Link>

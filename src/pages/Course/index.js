@@ -12,57 +12,63 @@ function AccordionItem({ course, module, index }) {
   return (
     <li
       key={module.id}
-      className="bg-white p-5 rounded-xl shadow-md accordion-item"
+      className="accordion-item rounded-xl bg-white p-5 shadow-md transition-all duration-300 ease-in-out"
     >
       <div
-        className="flex justify-between items-center w-full"
+        className="flex w-full items-center justify-between"
         onClick={() => setActive(!isActive)}
       >
-      <div className="flex items-center">
-        <h2 className="text-lg font-semibold font-Barlow text-primary mr-5 text-center accordion-title">
-          {module.nombre}
-        </h2>
-        <span>({index+1})</span>
-      </div>
-        
+        <div className="flex items-center">
+          <h2 className="accordion-title mr-5 text-center font-Barlow text-lg font-semibold text-primary">
+            {module.nombre}
+          </h2>
+          <span>({index + 1})</span>
+        </div>
+
         {isActive ? <CourseIcons name="minus" /> : <CourseIcons name="plus" />}
       </div>
-      {isActive && (
-        <ol className="accordion-content mt-10">
-          {module.clases.map((clase, index) => (
-            <li key={clase.id} className="border-t border-gray-200">
-              <Link
-                className="flex flex-col md:flex-row items-center content-center p-5 gap-5"
-                href={`/courses/${course}/${module.id}/${clase.id}`}
-              >
-                <img
-                  src={clase.thumbnails}
-                  alt={clase.nombre}
-                  className="aspect-video max-h-40 rounded-3xl border border-accent"
-                />
-                <div className="flex flex-col">
-                  <h3 className="text-md font-semibold font-Barlow text-primary mr-5">
-                    {index+1}. {clase.nombre}
-                  </h3>
-                  { 
-                  clase.completada ?
-                    <span className="text-accent">Complete</span>
-                  :
-                    <></>
-                  }
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ol>
-      )}
+      <ol
+        className={`accordion-content  overflow-hidden ${
+          isActive ? "max-h-auto mt-10" : " m-0 max-h-0 opacity-0"
+        } transition-all duration-500 ease-in-out`}
+      >
+        {module.clases.map((clase, index) => (
+          <li key={clase.id} className="border-t border-gray-200">
+            <Link
+              className="flex flex-col content-center items-center gap-5 p-5 md:flex-row"
+              href={`/courses/${course}/${module.id}/${clase.id}`}
+            >
+              <img
+                src={clase.thumbnails}
+                alt={clase.nombre}
+                className="aspect-video max-h-40 rounded-3xl border border-accent"
+              />
+              <div className="flex flex-col">
+                <h3 className="text-md mr-5 font-Barlow font-semibold text-primary">
+                  {index + 1}. {clase.nombre}
+                </h3>
+                {clase.completada ? (
+                  <span className="text-accent">Complete</span>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ol>
     </li>
   );
 }
 
 function Module({ course, modules = [] }) {
   return modules.map((module, index) => (
-    <AccordionItem key={module.id} course={course} module={module} index={index} />
+    <AccordionItem
+      key={module.id}
+      course={course}
+      module={module}
+      index={index}
+    />
   ));
 }
 
@@ -76,10 +82,10 @@ export default function CoursePage({ params }) {
 
   return (
     <section className="p-5">
-      <h1 className="text-2xl font-semibold font-Barlow text-primary mr-5">
+      <h1 className="mr-5 font-Barlow text-2xl font-semibold text-primary">
         {course.nombre}
       </h1>
-      <ol className="p-5 flex flex-col gap-2 accordion">
+      <ol className="accordion flex flex-col gap-2 p-5">
         {<Module course={course.id} modules={course.modulos} />}
       </ol>
     </section>

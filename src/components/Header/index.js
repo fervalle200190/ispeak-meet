@@ -18,7 +18,7 @@ export default function Header({ user }) {
     <>
       <header className="flex h-[72px] w-full items-center justify-between bg-white px-10 shadow-sm">
         <button className="md:hidden" onClick={() => setIsOpen(true)}>
-          +
+          <HeaderIcons name="hamburguer" />
         </button>
         <HeaderSearchBar />
         <div className="flex gap-5">
