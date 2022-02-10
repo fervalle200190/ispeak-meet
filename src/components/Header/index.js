@@ -3,7 +3,7 @@ import { Link } from "wouter";
 
 import HeaderIcons from "components/HeaderIcons";
 import HeaderSearchBar from "components/HeaderSearchBar";
-import { SideBarContext } from "hooks/sideBarContext";
+import { SideBarContext } from "context/sideBarContext";
 
 export default function Header({ user }) {
   const username = user.nombre.split(" ").slice(0, 1);

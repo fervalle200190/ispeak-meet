@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SideBarContext } from "hooks/sideBarContext";
+import { SideBarContext } from "context/sideBarContext";
 import { Link } from "wouter";
 
 import SideNav from "../SideNav";

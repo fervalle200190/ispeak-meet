@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import ReactPlayer from "react-player/vimeo";
 
 import getCourseById from "services/getCourseById";
+import getModuleById from "services/getModuleById";
 import getMaterialById from "services/getMaterialById";
 import getCommentsByMaterialId from "services/getCommentsByMaterialId";
 
@@ -22,10 +23,18 @@ function MaterialContentSection({ courseId, course, isActive = false }) {
   );
 }
 
-function MaterialAboutSection({ isActive = true }) {
+function MaterialAboutSection({ isActive = true, moduleId }) {
+  const [about, setAbout] = useState();
+  useEffect(() => {
+    getModuleById(moduleId).then((response) => setAbout(response));
+  }, [moduleId]);
+
   return isActive ? (
-    <div className="w-full">
-      <p>About</p>
+    <div className="w-full px-10 py-5">
+      <h4 className="font text-lg font-semibold text-primary">Content</h4>
+      {/* <p>{about.contenido}</p> */}
+      <h4 className="font mt-5 text-lg font-semibold text-primary">Goals</h4>
+      {/* <p>{about.objetivos}</p> */}
     </div>
   ) : (
     <></>
@@ -206,7 +215,7 @@ export default function MaterialPage({ params }) {
             </li>
           </ul>
         </header>
-        <MaterialAboutSection isActive={isActive.about} />
+        <MaterialAboutSection isActive={isActive.about} moduleId={moduleId} />
         <MaterialCommentsSection
           materialId={material.id}
           isActive={isActive.comments}

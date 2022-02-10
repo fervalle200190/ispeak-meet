@@ -9,6 +9,7 @@ export default function getCourseById({ id }) {
     .then((response) => {
       const data = response;
       const course = data.filter((course) => course.id === parseInt(id));
+      console.log(course);
       return course[0];
     });
 }

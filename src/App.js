@@ -13,7 +13,7 @@ import SideBar from "./components/SideBar";
 import Header from "./components/Header";
 
 import "./App.css";
-import { SideBarContext } from "hooks/sideBarContext";
+import { SideBarContext } from "context/sideBarContext";
 
 function App() {
   const [user, setUser] = useState(null);
