@@ -42,7 +42,7 @@ function App() {
               <Route component={CoursePage} path="/courses/:courseId" />
               <Route
                 component={MaterialPage}
-                path="/courses/:courseId/:moduleId/:materialId"
+                path="/courses/:courseId/module/:moduleId/material/:materialId"
               />
               <Route component={AdditionalMaterialPage} path="/refuerzo" />
               <Route component={ProfilePage} path="/profile" />

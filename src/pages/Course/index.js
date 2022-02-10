@@ -36,7 +36,7 @@ function AccordionItem({ course, module, index }) {
           <li key={clase.id} className="border-t border-slate-900">
             <Link
               className="flex flex-col content-center items-center gap-5 p-5 md:flex-row"
-              href={`/courses/${course}/${module.id}/${clase.id}`}
+              href={`/courses/${course}/module/${module.id}/material/${clase.id}`}
             >
               <img
                 src={clase.thumbnails}

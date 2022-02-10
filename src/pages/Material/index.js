@@ -29,12 +29,12 @@ function MaterialAboutSection({ isActive = true, moduleId }) {
     getModuleById(moduleId).then((response) => setAbout(response));
   }, [moduleId]);
 
-  return isActive ? (
+  return isActive && about ? (
     <div className="w-full px-10 py-5">
       <h4 className="font text-lg font-semibold text-primary">Content</h4>
-      {/* <p>{about.contenido}</p> */}
+      <p>{about.contenido}</p>
       <h4 className="font mt-5 text-lg font-semibold text-primary">Goals</h4>
-      {/* <p>{about.objetivos}</p> */}
+      <p>{about.objetivos}</p>
     </div>
   ) : (
     <></>
@@ -99,9 +99,10 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getCommentsByMaterialId({ id: materialId }).then((comments) =>
-      setComments(comments)
-    );
+    if (isActive)
+      getCommentsByMaterialId({ id: materialId }).then((comments) =>
+        setComments(comments)
+      );
   }, [isActive, materialId]);
 
   return isActive ? (
@@ -154,7 +155,7 @@ export default function MaterialPage({ params }) {
 
   return (
     <>
-      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-primary text-white lg:p-10">
+      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-material text-white lg:p-10">
         <div className="hidden max-h-[70vh] w-1/3 flex-col lg:flex">
           <header className="flex max-h-[20vh] flex-col gap-5 pl-5">
             <Link href="/courses" className="flex items-center gap-2">
@@ -186,7 +187,7 @@ export default function MaterialPage({ params }) {
           </div>
         </div>
       </section>
-      <section>
+      <section className=" bg-gray-100">
         <header className="h-20 w-full border-b-[1px] border-gray-400 px-10">
           <ul className="flex h-full items-center gap-5">
             <li
