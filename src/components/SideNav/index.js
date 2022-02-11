@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import SideNavItem from "../SideNavItem";
 import SideNavIcons from "../SideNavIcons";
 

@@ -10,7 +10,7 @@ export default function CourseCard({
   return (
     <Link
       href={`/courses/${id}`}
-      className="flex w-64 flex-col rounded-xl bg-white shadow-md transition delay-[50ms] ease-in-out hover:scale-[1.01] hover:shadow-xl"
+      className="flex w-64 flex-col rounded-xl border border-gray-200 bg-white shadow-sm transition delay-[50ms] ease-in-out hover:scale-[1.01] hover:shadow-md"
     >
       <div>
         {/* <img src={thumbnail} alt="" className="rounded-3xl object-cover" /> */}

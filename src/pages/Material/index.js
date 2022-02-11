@@ -43,7 +43,7 @@ function MaterialAboutSection({ isActive = true, moduleId }) {
 
 function Replys({ reply }) {
   return (
-    <div className="ml-5 mt-5 rounded-xl border border-accent p-5">
+    <div className="ml-5 mt-5 rounded-xl border border-gray-300 p-5 shadow-lg">
       <header className="flex justify-between border-b-2 border-accent">
         <div>
           <img url={reply.imagen} alt="" />
@@ -61,7 +61,7 @@ function Comment({ comment }) {
   return (
     <div
       key={comment.id}
-      className="w-full max-w-3xl rounded-xl border border-gray-400 p-5"
+      className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
     >
       <header className="flex justify-between border-b-4 border-accent p-2">
         <div>
@@ -106,7 +106,7 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   }, [isActive, materialId]);
 
   return isActive ? (
-    <div className="flex w-full flex-col items-center gap-5 p-10">
+    <div className="flex w-full flex-col items-center gap-5 bg-gray-100 p-10">
       <CommentsList comments={comments} />
     </div>
   ) : (
@@ -143,12 +143,14 @@ export default function MaterialPage({ params }) {
         ({ id }) => id === materialI + 1
       );
       setMaterialComplete({ materialId, classNum: material.claseNumero });
-      setLocation(`/courses/${courseId}/${moduleId}/${nextMaterial.id}`);
+      setLocation(
+        `/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`
+      );
     } else {
       const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
       setMaterialComplete({ materialId, classNum: material.claseNumero });
       setLocation(
-        `/courses/${courseId}/${nextModule.id}/${nextModule.clases[0].id}`
+        `/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`
       );
     }
   }
@@ -188,7 +190,7 @@ export default function MaterialPage({ params }) {
         </div>
       </section>
       <section className=" bg-gray-100">
-        <header className="h-20 w-full border-b-[1px] border-gray-400 px-10">
+        <header className="h-20 w-full border-b border-gray-200 bg-white px-10 shadow-sm">
           <ul className="flex h-full items-center gap-5">
             <li
               className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"

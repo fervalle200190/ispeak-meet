@@ -7,56 +7,69 @@ import "./styles.css";
 import CourseIcons from "components/CourseIcons";
 
 function AccordionItem({ course, module, index }) {
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(true);
 
   return (
     <li
       key={module.id}
-      className="accordion-item rounded-xl bg-primary p-5 text-gray-50 shadow-md transition-all duration-300 ease-in-out"
+      className="accordion-item rounded-xl border-gray-200 bg-white p-5 text-primary shadow-sm transition-all duration-300 ease-in-out"
     >
       <div
         className="flex w-full items-center justify-between"
         onClick={() => setActive(!isActive)}
       >
         <div className="flex items-center">
-          <h2 className="accordion-title mr-5 text-center font-Barlow text-lg font-semibold text-gray-50">
+          <h2 className="accordion-title mr-5 text-center font-Barlow text-lg font-semibold text-primary">
             {module.nombre}
           </h2>
-          <span>({index + 1})</span>
         </div>
 
         {isActive ? <CourseIcons name="minus" /> : <CourseIcons name="plus" />}
       </div>
       <ol
-        className={`accordion-content  overflow-hidden ${
-          isActive ? "max-h-auto mt-10" : " m-0 max-h-0 opacity-0"
-        } transition-all duration-500 ease-in-out`}
+        className={`accordion-content flex flex-wrap  justify-center gap-5 sm:justify-start ${
+          isActive
+            ? "display mt-10 max-h-min"
+            : "m-0 max-h-0 overflow-hidden opacity-0"
+        } mb-1 transition-all duration-500 ease-in-out`}
       >
         {module.clases.map((clase, index) => (
-          <li key={clase.id} className="border-t border-slate-900">
+          <li key={clase.id}>
             <Link
-              className="flex flex-col content-center items-center gap-5 p-5 md:flex-row"
+              className="flex h-64 w-56 flex-col rounded-xl border border-gray-300 bg-white shadow-md"
               href={`/courses/${course}/module/${module.id}/material/${clase.id}`}
             >
-              <img
-                src={clase.thumbnails}
-                alt={clase.nombre}
-                className="aspect-video max-h-40 rounded-3xl"
-              />
-              <div className="flex flex-col">
-                <h3 className="text-md mr-5 font-Barlow font-semibold text-gray-50">
-                  {index + 1}. {clase.nombre}
-                </h3>
+              <div className="relative overflow-hidden rounded-t-xl">
+                <img
+                  src={clase.thumbnails}
+                  alt={clase.nombre}
+                  className={`h-36 object-cover ${
+                    clase.completada ? "blur-sm" : "blur-none"
+                  }`}
+                />
+                <div className="absolute left-0 top-0 z-10 h-full w-full bg-black opacity-10"></div>
                 {clase.completada ? (
-                  <div>
-                    <div className="mt-2 flex h-8 max-w-[8.5rem] items-center justify-center rounded-full bg-accent p-5">
-                      <span className="mr-1 text-primary">Complete</span>
+                  <>
+                    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-accent p-2">
+                      <span className="mr-1 font-semibold text-primary">
+                        Complete
+                      </span>
                       <CourseIcons name="check" />
                     </div>
-                  </div>
+                  </>
                 ) : (
                   <></>
                 )}
+              </div>
+              <div className="flex w-full justify-between overflow-hidden rounded-b-lg">
+                <div className="flex  p-5 font-semibold">
+                  <h3 className="font-Barlow font-semibold text-primary">
+                    {clase.nombre}
+                  </h3>
+                </div>
+                <div className=" flex h-28 items-center justify-center border-l border-gray-200 p-3 text-2xl font-semibold text-primary">
+                  <span>{index + 1}</span>
+                </div>
               </div>
             </Link>
           </li>
@@ -90,7 +103,7 @@ export default function CoursePage({ params }) {
       <h1 className="mr-5 font-Barlow text-2xl font-semibold text-primary">
         {course.nombre}
       </h1>
-      <ol className="accordion flex flex-col gap-2 p-5">
+      <ol className="accordion flex flex-col gap-3 p-5">
         {<Module course={course.id} modules={course.modulos} />}
       </ol>
     </section>
