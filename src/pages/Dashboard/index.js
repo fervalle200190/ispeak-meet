@@ -26,11 +26,6 @@ export default function DashboardPage() {
           courses={myCourses}
           link="/courses"
         />
-        <CourseListSection
-          title="Recommended Courses."
-          courses={allCourses}
-          link="/"
-        />
       </div>
     </>
   );

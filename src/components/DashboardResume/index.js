@@ -1,27 +1,49 @@
+import { useState, useEffect } from "react";
+import getAllCoursesByUser from "services/getAllCoursesByUser";
 import DashboardIcons from "components/DashboardIcons";
 
-export default function DashboardResume({ title, duration, thumbnail, url }) {
+const getContinueWatching = (courses) => {
+  for (let course of courses) {
+    for (let module of course.modulos) {
+      for (let material of module.clases) {
+        if (!material.completada) return material;
+      }
+    }
+  }
+};
+
+export default function DashboardResume() {
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
+  const [resume, setResume] = useState({});
+
+  useEffect(() => {
+    getAllCoursesByUser(user.id).then((response) => {
+      setResume(getContinueWatching(response));
+    });
+  }, [user.id]);
+
   return (
-    <div className="h-[26rem] w-[40rem] rounded-3xl bg-primary">
-      <div className="relative h-3/4">
-        <h3 className="absolute top-5 left-5 z-20 text-2xl font-medium text-white/90">
-          {title}
-        </h3>
-        <div className="absolute top-1/2 left-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/50 p-10 text-white">
-          <DashboardIcons name="play" />
+    <div className="flex max-h-fit min-h-[20px] w-full flex-col gap-5 overflow-hidden rounded-xl bg-primary text-gray-50 shadow-sm">
+      <div className="w-full">
+        <div className="relative w-full">
+          <div className="absolute left-0 top-0 z-10 h-full w-full rounded-bl-[2rem] bg-black opacity-30"></div>
+          <span className="absolute left-2 top-2 z-10 text-xl font-semibold">
+            {resume.nombre}
+          </span>
+          <button className="absolute top-1/2 left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 text-white">
+            <DashboardIcons name="play" />
+          </button>
+          <img
+            src={resume.thumbnails}
+            alt=""
+            className="h-full w-full rounded-bl-[2rem]"
+          />
         </div>
-        <div className="absolute top-0 left-0 z-10 h-full w-full rounded-t-3xl rounded-bl-[2rem] bg-black opacity-20"></div>
-        <img
-          src={thumbnail}
-          alt=""
-          className="absolute top-0 left-0 h-full w-full rounded-bl-[2rem]"
-        />
-      </div>
-      <div className="flex h-1/4 w-full flex-wrap items-center justify-between px-10">
-        <span className="text-white">{duration}</span>
-        <button className="rounded-lg bg-accent py-2 px-5 text-xl font-medium text-primary">
-          Continue your recent courses {">"}
-        </button>
+        <div className="flex w-full justify-end p-5">
+          <button className="> rounded-xl bg-accent py-2 px-5 font-medium text-primary">
+            Continue your recent courses{" >"}
+          </button>
+        </div>
       </div>
     </div>
   );
