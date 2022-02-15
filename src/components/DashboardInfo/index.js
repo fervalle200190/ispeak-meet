@@ -58,7 +58,7 @@ export default function DashboardInfo() {
         </div>
       </div>
       <div className="">
-        <div className="flex flex-col gap-3">
+        {/* <div className="flex flex-col gap-3">
           {inProgress.map(({ nombre, porcentajeCompletado }) => {
             return (
               <div className="flex flex-col gap-2">
@@ -74,7 +74,7 @@ export default function DashboardInfo() {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

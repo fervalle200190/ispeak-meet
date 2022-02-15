@@ -15,7 +15,7 @@ import setMaterialComplete from "services/setMaterialComplete";
 
 function MaterialContentSection({ courseId, course, isActive = false }) {
   return isActive ? (
-    <section className="flex w-full items-center justify-center p-5 md:p-10">
+    <section className="flex w-full items-center justify-center">
       <CourseNav courseId={courseId} units={course.modulos} />
     </section>
   ) : (
@@ -97,6 +97,14 @@ function CommentsList({ comments = [] }) {
 
 function MaterialCommentsSection({ materialId, isActive = false }) {
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState({
+    CursoId: "",
+    Fecha: "",
+    UsuarioId: "",
+    MaterialId: "",
+    ComentarioId: "0",
+    Comentario: "",
+  });
 
   useEffect(() => {
     if (isActive)
@@ -106,8 +114,16 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   }, [isActive, materialId]);
 
   return isActive ? (
-    <div className="flex w-full flex-col items-center gap-5 bg-gray-100 p-10">
+    <div className="flex w-full flex-col items-center gap-5 bg-gray-100 p-5 md:p-10">
       <CommentsList comments={comments} />
+      <form className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <lable>Leave a comment</lable>
+        <input
+          type="text"
+          value=""
+          className="h-20 w-full rounded-xl border border-gray-400"
+        />
+      </form>
     </div>
   ) : (
     <></>

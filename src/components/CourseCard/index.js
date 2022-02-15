@@ -11,12 +11,12 @@ export default function CourseCard({
   return (
     <Link
       href={`/courses/${id}`}
-      className="flex w-64 flex-col rounded-xl border border-gray-200 bg-white shadow-sm transition delay-[50ms] ease-in-out hover:scale-[1.01] hover:shadow-md"
+      className="flex w-full flex-col rounded-xl border border-gray-200 bg-white shadow-sm transition delay-[50ms] ease-in-out hover:scale-[1.01] hover:shadow-md md:w-64"
     >
-      <div>
-        <div className="h-5 w-full rounded-xl bg-accent/30">
+      <div className="py-5 px-2">
+        <div className="h-5 w-full rounded-xl bg-primary/30">
           <div
-            className="flex h-full min-w-fit items-center rounded-xl bg-accent px-2 text-right text-primary"
+            className="flex h-full min-w-fit items-center rounded-xl bg-primary px-2 text-right text-gray-50"
             style={{ width: progress + "%" }}
           >
             <span className="w-full">{progress}%</span>

@@ -14,7 +14,8 @@ export default function getCoursesByUserId() {
                 const students = course.cantidadAlumnos
                 const duration = course.duracion
                 const professor = course.profesor
-                return {id, title, students, duration, professor}
+                const progress = course.porcentajeCompletado
+                return {id, title, students, duration, professor, progress}
             })
             return courses
         })
