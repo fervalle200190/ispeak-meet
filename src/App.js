@@ -31,7 +31,7 @@ function App() {
     <>
       {!user ? (
         <Route component={LoginPage} path="/" />
-      ) : (
+      ) : user.rol === "Alumno" ? (
         <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
           <div className="App flex flex-col items-center md:ml-60">
             <SideBar />
@@ -47,6 +47,14 @@ function App() {
               <Route component={AdditionalMaterialPage} path="/refuerzo" />
               <Route component={ProfilePage} path="/profile" />
             </main>
+          </div>
+        </SideBarContext.Provider>
+      ) : (
+        <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
+          <div className="App flex flex-col items-center md:ml-60">
+            <SideBar />
+            <Header user={user} />
+            <main className="w-full"></main>
           </div>
         </SideBarContext.Provider>
       )}
