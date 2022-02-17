@@ -15,6 +15,36 @@ import Header from "./components/Header";
 import "./App.css";
 import { SideBarContext } from "context/sideBarContext";
 
+const RenderProfessorView = (user) => {
+  return (
+    <div className="App flex flex-col items-center md:ml-60">
+      <SideBar />
+      <Header user={user} />
+      <main className="w-full"></main>
+    </div>
+  );
+};
+
+const RenderStudentView = (user) => {
+  return (
+    <div className="App flex flex-col items-center md:ml-60">
+      <SideBar />
+      <Header user={user} />
+      <main className="w-full">
+        <Route component={DashboardPage} path="/" />
+        <Route component={CoursesPage} path="/courses" />
+        <Route component={CoursePage} path="/courses/:courseId" />
+        <Route
+          component={MaterialPage}
+          path="/courses/:courseId/module/:moduleId/material/:materialId"
+        />
+        <Route component={AdditionalMaterialPage} path="/refuerzo" />
+        <Route component={ProfilePage} path="/profile" />
+      </main>
+    </div>
+  );
+};
+
 function App() {
   const [user, setUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -31,31 +61,13 @@ function App() {
     <>
       {!user ? (
         <Route component={LoginPage} path="/" />
-      ) : user.rol === "Alumno" ? (
-        <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
-          <div className="App flex flex-col items-center md:ml-60">
-            <SideBar />
-            <Header user={user} />
-            <main className="w-full">
-              <Route component={DashboardPage} path="/" />
-              <Route component={CoursesPage} path="/courses" />
-              <Route component={CoursePage} path="/courses/:courseId" />
-              <Route
-                component={MaterialPage}
-                path="/courses/:courseId/module/:moduleId/material/:materialId"
-              />
-              <Route component={AdditionalMaterialPage} path="/refuerzo" />
-              <Route component={ProfilePage} path="/profile" />
-            </main>
-          </div>
-        </SideBarContext.Provider>
       ) : (
         <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
-          <div className="App flex flex-col items-center md:ml-60">
-            <SideBar />
-            <Header user={user} />
-            <main className="w-full"></main>
-          </div>
+          {user.rol === "Profesor" ? (
+            <RenderProfessorView user={user} />
+          ) : (
+            <RenderStudentView user={user} />
+          )}
         </SideBarContext.Provider>
       )}
     </>
