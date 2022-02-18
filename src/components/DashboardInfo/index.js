@@ -23,7 +23,7 @@ export default function DashboardInfo() {
   const [completed, setCompleted] = useState();
   const [inProgress, setInProgress] = useState([]);
   const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
-  const username = user.nombre.split(" ").slice(0, 1);
+  const username = user.user.nombre.split(" ").slice(0, 1);
 
   useEffect(() => {
     getAllCoursesByUser(user.id).then((response) => {

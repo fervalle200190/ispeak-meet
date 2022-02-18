@@ -16,6 +16,7 @@ import "./App.css";
 import { SideBarContext } from "context/sideBarContext";
 
 const RenderProfessorView = (user) => {
+  console.log(user.user);
   return (
     <div className="App flex flex-col items-center md:ml-60">
       <SideBar />
@@ -26,6 +27,7 @@ const RenderProfessorView = (user) => {
 };
 
 const RenderStudentView = (user) => {
+  console.log(user.user);
   return (
     <div className="App flex flex-col items-center md:ml-60">
       <SideBar />
@@ -64,9 +66,9 @@ function App() {
       ) : (
         <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
           {user.rol === "Profesor" ? (
-            <RenderProfessorView user={user} />
+            <RenderProfessorView />
           ) : (
-            <RenderStudentView user={user} />
+            <RenderStudentView />
           )}
         </SideBarContext.Provider>
       )}

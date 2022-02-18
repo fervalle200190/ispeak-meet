@@ -5,8 +5,9 @@ import HeaderIcons from "components/HeaderIcons";
 import HeaderSearchBar from "components/HeaderSearchBar";
 import { SideBarContext } from "context/sideBarContext";
 
-export default function Header({ user }) {
+export default function Header() {
   const { setIsOpen } = useContext(SideBarContext);
+  const user = JSON.parse(localStorage.getItem("loggedAppUser"));
   const username = user.nombre.split(" ").slice(0, 1);
 
   const handleLogout = () => {
