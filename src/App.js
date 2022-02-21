@@ -21,7 +21,9 @@ const RenderProfessorView = (user) => {
     <div className="App flex flex-col items-center md:ml-60">
       <SideBar />
       <Header user={user} />
-      <main className="w-full"></main>
+      <main className="w-full ">
+        <Route component={DashboardPage} path="/" />
+      </main>
     </div>
   );
 };
