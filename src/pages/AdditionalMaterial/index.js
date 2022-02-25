@@ -9,7 +9,6 @@ export default function AdditionalMaterialPage() {
 
   useEffect(() => {
     getAdditionalMaterialByUser().then((response) => {
-      console.log(response);
       setRefuerzo(response);
     });
   }, []);

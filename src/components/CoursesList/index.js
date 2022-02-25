@@ -4,7 +4,6 @@ export default function CourseList({ courses }) {
   return (
     <div className="flex flex-wrap gap-5">
       {courses.map(({ id, title, students, duration, professor, progress }) => {
-        console.log(progress);
         return (
           <CourseCard
             key={id}

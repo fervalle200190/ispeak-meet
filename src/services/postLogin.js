@@ -19,7 +19,8 @@ export default function postLogin({ email, password }) {
     })
     .then((response) => {
       if (response === false) return false;
-      const data = response;
+      const { id, email, nombre, rol } = response;
+      const data = { id, email, nombre, rol };
       window.localStorage.setItem("loggedAppUser", JSON.stringify(data));
       return data;
     });

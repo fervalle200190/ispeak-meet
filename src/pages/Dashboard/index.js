@@ -4,7 +4,6 @@ import DashboardSection from "components/DashboardSection";
 import CourseListSection from "components/CoursesSection";
 
 import getCoursesByUserId from "services/getCoursesByUserId";
-import getAllCourses from "services/getAllCourses";
 import getCoursesByProfessor from "services/getCoursesByProfessorId";
 
 // import placeholder from "assets/placeholder.png"
@@ -56,7 +55,7 @@ const RenderProfessor = () => {
   );
 };
 
-const RenderStudent = (courses) => {
+const RenderStudent = ({ courses }) => {
   return (
     <div className="max-w-7xl">
       <DashboardSection />
@@ -70,14 +69,16 @@ const RenderStudent = (courses) => {
 };
 
 export default function DashboardPage() {
+  const userInfo = JSON.parse(localStorage.getItem("loggedAppUser"));
   const [myCourses, setMyCourses] = useState([]);
-  const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
     getCoursesByUserId().then((courses) => setMyCourses(courses));
-    getAllCourses().then((courses) => setAllCourses(courses));
   }, []);
 
-  // return <RenderStudent courses={myCourses} />;
-  return <RenderProfessor />;
+  return userInfo.rol === "Profesor" ? (
+    <RenderProfessor />
+  ) : (
+    <RenderStudent courses={myCourses} />
+  );
 }

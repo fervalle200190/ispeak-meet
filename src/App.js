@@ -8,6 +8,11 @@ import CoursePage from "./pages/Course";
 import MaterialPage from "./pages/Material";
 import AdditionalMaterialPage from "./pages/AdditionalMaterial";
 import ProfilePage from "pages/Profile";
+import StudentsPage from "pages/Students";
+import ProfessorCoursesPage from "pages/ProfessorCourses";
+import AssistancePage from "pages/Assistance";
+import FollowUpPage from "pages/FollowUp";
+import ProgressPage from "pages/Progress";
 
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
@@ -15,21 +20,26 @@ import Header from "./components/Header";
 import "./App.css";
 import { SideBarContext } from "context/sideBarContext";
 
-const RenderProfessorView = (user) => {
-  console.log(user.user);
+const RenderProfessorView = () => {
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
   return (
     <div className="App flex flex-col items-center md:ml-60">
       <SideBar />
       <Header user={user} />
       <main className="w-full ">
         <Route component={DashboardPage} path="/" />
+        <Route component={StudentsPage} path="/students" />
+        <Route component={ProfessorCoursesPage} path="/courses" />
+        <Route component={AssistancePage} path="/assistance" />
+        <Route component={FollowUpPage} path="/followup" />
+        <Route component={ProgressPage} path="/progress" />
       </main>
     </div>
   );
 };
 
-const RenderStudentView = (user) => {
-  console.log(user.user);
+const RenderStudentView = () => {
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
   return (
     <div className="App flex flex-col items-center md:ml-60">
       <SideBar />
