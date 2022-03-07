@@ -5,8 +5,7 @@ import CourseListSection from "components/CoursesSection";
 
 import getCoursesByUserId from "services/getCoursesByUserId";
 import getCoursesByProfessor from "services/getCoursesByProfessorId";
-
-// import placeholder from "assets/placeholder.png"
+import DashboardCourses from "components/DashboardCourses";
 
 const RenderProfessor = () => {
   useEffect(() => {
@@ -59,11 +58,12 @@ const RenderStudent = ({ courses }) => {
   return (
     <div className="max-w-7xl">
       <DashboardSection />
-      <CourseListSection
+      {/* <CourseListSection
         title="Your Courses."
         courses={courses}
         link="/courses"
-      />
+      /> */}
+      <DashboardCourses />
     </div>
   );
 };

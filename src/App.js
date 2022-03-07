@@ -19,6 +19,8 @@ import Header from "./components/Header";
 
 import "./App.css";
 import { SideBarContext } from "context/sideBarContext";
+import { CoursesContext } from "context/coursesContext";
+import getAllCoursesByUser from "services/getAllCoursesByUser";
 
 const RenderProfessorView = () => {
   const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
@@ -39,23 +41,33 @@ const RenderProfessorView = () => {
 };
 
 const RenderStudentView = () => {
-  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
+  const USER = JSON.parse(window.localStorage.getItem("loggedAppUser"));
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getAllCoursesByUser(USER.id).then((response) => setCourses(response));
+  }, [USER.id]);
+
   return (
-    <div className="App flex flex-col items-center md:ml-60">
-      <SideBar />
-      <Header user={user} />
-      <main className="w-full">
-        <Route component={DashboardPage} path="/" />
-        <Route component={CoursesPage} path="/courses" />
-        <Route component={CoursePage} path="/courses/:courseId" />
-        <Route
-          component={MaterialPage}
-          path="/courses/:courseId/module/:moduleId/material/:materialId"
-        />
-        <Route component={AdditionalMaterialPage} path="/refuerzo" />
-        <Route component={ProfilePage} path="/profile" />
-      </main>
-    </div>
+    <>
+      <CoursesContext.Provider value={courses}>
+        <div className="App flex flex-col items-center md:ml-60">
+          <SideBar />
+          <Header user={USER} />
+          <main className="w-full">
+            <Route component={DashboardPage} path="/" />
+            <Route component={CoursesPage} path="/courses" />
+            <Route component={CoursePage} path="/courses/:courseId" />
+            <Route
+              component={MaterialPage}
+              path="/courses/:courseId/module/:moduleId/material/:materialId"
+            />
+            <Route component={AdditionalMaterialPage} path="/refuerzo" />
+            <Route component={ProfilePage} path="/profile" />
+          </main>
+        </div>
+      </CoursesContext.Provider>
+    </>
   );
 };
 
