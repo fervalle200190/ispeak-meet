@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 
-import getCoursesByUserId from "services/getCoursesByUserId";
+// import getCoursesByUserId from "services/getCoursesByUserId";
+import { CoursesContext } from "context/coursesContext";
 
 import CourseListSection from "components/CoursesSection";
 import CoursesHeader from "components/CoursesHeader";
 
 export default function CoursesPage() {
-  const [myCourses, setMyCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
+  const courses = useContext(CoursesContext);
+  console.log(courses);
 
-  useEffect(() => {
-    getCoursesByUserId().then((courses) => setMyCourses(courses));
-  }, []);
+  // useEffect(() => {
+  //   getCoursesByUserId().then((courses) => setMyCourses(courses));
+  // }, []);
 
   return (
     <>
       <section className="flex w-full flex-col gap-5 p-5 md:p-10">
-        <CoursesHeader coursesNum={myCourses.length} />
-        <CourseListSection courses={myCourses} />
+        <CoursesHeader coursesNum={courses.length} />
+        <CourseListSection courses={courses} />
       </section>
     </>
   );
