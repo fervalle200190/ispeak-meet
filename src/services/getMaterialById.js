@@ -6,6 +6,7 @@ export default function getMaterialById({ id }) {
     .then((response) => response.json())
     .then((response) => {
       const data = response;
+      console.log();
       return data;
     });
 }

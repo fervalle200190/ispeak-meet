@@ -3,6 +3,8 @@ import { CoursesContext } from "context/coursesContext";
 import { useContext, useState } from "react";
 import { Link } from "wouter";
 
+const ContentReview = () => {};
+
 const CourseCard = ({ title, courses }) => {
   const [isActive, setIsActive] = useState(false);
   console.log(courses);
@@ -94,7 +96,7 @@ export default function DashboardCourses() {
     <div className="flex w-full flex-wrap gap-5 p-5">
       <LearningCard title="Personalized Learning Path" courses={learningPath} />
       {/* <CourseCard title="Personalized Learning Path" courses={learningPath} /> */}
-      <CourseCard title="Learn at your onw pace" courses={onDemand} />
+      <CourseCard title="Learn at your own pace" courses={onDemand} />
     </div>
   );
 }
