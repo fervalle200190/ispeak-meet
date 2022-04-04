@@ -109,13 +109,14 @@ function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
     event.preventDefault();
     if (comment) {
       const data = {
-        UsuarioId: userId,
-        MaterialId: materialId,
-        CursoId: courseId,
+        UsuarioId: userId.toString(),
+        MaterialId: materialId.toString(),
+        CursoId: courseId.toString(),
         Comentario: comment,
         CommentarioId: 0,
       };
-      postComment(JSON.stringify(data));
+      console.log(JSON.stringify(data));
+      postComment({ comment: data });
     }
   };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 
 import getAllCoursesByUser from "services/getAllCoursesByUser";
 import DashboardIcons from "components/DashboardIcons";
@@ -13,8 +13,9 @@ const getContinueWatching = (courses) => {
         if (!material.completada) {
           console.log(material);
           return {
-            link: `/courses/${courseId}/module/${moduleId}/material/${material.id}`,
-            material: material,
+            nombre: material.nombre,
+            thumbnail: material.thumbnails,
+            url: `/courses/${courseId}/module/${moduleId}/material/${material.id}`,
           };
         }
       }
@@ -25,12 +26,17 @@ const getContinueWatching = (courses) => {
 export default function DashboardResume() {
   const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
   const [resume, setResume] = useState({});
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     getAllCoursesByUser(user.id).then((response) => {
       setResume(getContinueWatching(response));
     });
   }, [user.id]);
+
+  const handleResume = () => {
+    setLocation(resume.url);
+  };
 
   return (
     <div className="flex max-h-fit min-h-[20px] w-full flex-col gap-5 overflow-hidden rounded-xl bg-primary text-gray-50 shadow-sm">
@@ -40,17 +46,23 @@ export default function DashboardResume() {
           <span className="absolute left-2 top-2 z-10 text-xl font-semibold">
             {resume.nombre}
           </span>
-          <button className="absolute top-1/2 left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 text-white">
+          <button
+            onClick={() => handleResume()}
+            className="absolute top-1/2 left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/30 text-white"
+          >
             <DashboardIcons name="play" />
           </button>
           <img
-            src={resume.thumbnails}
+            src={resume.thumbnail}
             alt=""
             className="h-full w-full rounded-bl-[2rem]"
           />
         </div>
         <div className="flex w-full justify-end p-5">
-          <button className="> rounded-xl bg-accent py-2 px-5 font-medium text-primary">
+          <button
+            onClick={() => handleResume()}
+            className="> rounded-xl bg-accent py-2 px-5 font-medium text-primary"
+          >
             Continue your recent courses{" >"}
           </button>
         </div>
