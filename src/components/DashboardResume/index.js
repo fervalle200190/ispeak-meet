@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
+
 import getAllCoursesByUser from "services/getAllCoursesByUser";
 import DashboardIcons from "components/DashboardIcons";
 
 const getContinueWatching = (courses) => {
   for (let course of courses) {
+    const courseId = course.id;
     for (let module of course.modulos) {
+      const moduleId = module.id;
       for (let material of module.clases) {
-        if (!material.completada) return material;
+        if (!material.completada) {
+          console.log(material);
+          return {
+            link: `/courses/${courseId}/module/${moduleId}/material/${material.id}`,
+            material: material,
+          };
+        }
       }
     }
   }
@@ -48,3 +58,8 @@ export default function DashboardResume() {
     </div>
   );
 }
+
+// <Link
+//   className="flex h-64 w-56 flex-col rounded-xl border border-gray-300 bg-white shadow-md"
+//   href={`/courses/${course}/module/${module.id}/material/${clase.id}`}
+// ></Link>;

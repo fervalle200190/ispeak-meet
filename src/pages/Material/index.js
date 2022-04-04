@@ -6,6 +6,7 @@ import getCourseById from "services/getCourseById";
 import getModuleById from "services/getModuleById";
 import getMaterialById from "services/getMaterialById";
 import getCommentsByMaterialId from "services/getCommentsByMaterialId";
+import postComment from "services/postComment";
 
 import CourseNav from "components/CourseNav";
 import CourseIcons from "components/CourseIcons";
@@ -95,16 +96,28 @@ function CommentsList({ comments = [] }) {
   });
 }
 
-function MaterialCommentsSection({ materialId, isActive = false }) {
+function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState({
-    CursoId: "",
-    Fecha: "",
-    UsuarioId: "",
-    MaterialId: "",
-    ComentarioId: "0",
-    Comentario: "",
-  });
+  const [comment, setComment] = useState("");
+  const userId = JSON.parse(window.localStorage.getItem("loggedAppUser")).id;
+
+  const handleChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (comment) {
+      const data = {
+        UsuarioId: userId,
+        MaterialId: materialId,
+        CursoId: courseId,
+        Comentario: comment,
+        CommentarioId: 0,
+      };
+      postComment(JSON.stringify(data));
+    }
+  };
 
   useEffect(() => {
     if (isActive)
@@ -116,13 +129,20 @@ function MaterialCommentsSection({ materialId, isActive = false }) {
   return isActive ? (
     <div className="flex w-full flex-col items-center gap-5 bg-gray-100 p-5 md:p-10">
       <CommentsList comments={comments} />
-      <form className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-        <lable>Leave a comment</lable>
-        <input
-          type="text"
-          value=""
-          className="h-20 w-full rounded-xl border border-gray-400"
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+      >
+        <label>Leave a comment</label>
+        <textarea
+          onChange={handleChange}
+          type="textarea"
+          value={comment}
+          className="h-20 w-full rounded-xl border border-gray-400 p-1"
         />
+        <button className="m-1 rounded-lg bg-accent p-2 text-primary">
+          Comment
+        </button>
       </form>
     </div>
   ) : (
@@ -236,6 +256,7 @@ export default function MaterialPage({ params }) {
         </header>
         <MaterialAboutSection isActive={isActive.about} moduleId={moduleId} />
         <MaterialCommentsSection
+          courseId={courseId}
           materialId={material.id}
           isActive={isActive.comments}
         />

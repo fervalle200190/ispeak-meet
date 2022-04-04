@@ -1,6 +1,6 @@
 import { API_URL } from "./settings";
 
-export default function createComment({ comment }) {
+export default function postComment({ comment }) {
   const URL = `${API_URL}`;
 
   fetch(URL, { method: "POST", body: comment })
