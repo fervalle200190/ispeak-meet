@@ -8,6 +8,7 @@ export default function getAllCoursesByUser({ id }) {
     .then((response) => response.json())
     .then((response) => {
       const data = response;
+      console.log(data);
       return data;
     });
 }
