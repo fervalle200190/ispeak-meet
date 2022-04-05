@@ -32,9 +32,9 @@ function MaterialAboutSection({ isActive = true, moduleId }) {
 
   return isActive && about ? (
     <div className="w-full px-10 py-5">
-      <h4 className="font text-lg font-semibold text-primary">Content</h4>
+      <h4 className="font text-primary text-lg font-semibold">Content</h4>
       <p>{about.contenido}</p>
-      <h4 className="font mt-5 text-lg font-semibold text-primary">Goals</h4>
+      <h4 className="font text-primary mt-5 text-lg font-semibold">Goals</h4>
       <p>{about.objetivos}</p>
     </div>
   ) : (
@@ -45,10 +45,10 @@ function MaterialAboutSection({ isActive = true, moduleId }) {
 function Replys({ reply }) {
   return (
     <div className="ml-5 mt-5 rounded-xl border border-gray-300 p-5 shadow-lg">
-      <header className="flex justify-between border-b-2 border-accent">
+      <header className="border-accent flex justify-between border-b-2">
         <div>
           <img url={reply.imagen} alt="" />
-          <span className="font-semibold text-primary">{reply.alumno}</span>
+          <span className="text-primary font-semibold">{reply.alumno}</span>
         </div>
         <span>{reply.fecha}</span>
       </header>
@@ -97,22 +97,22 @@ function Comment({ comment, userId, materialId, courseId }) {
       key={comment.id}
       className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
     >
-      <header className="flex justify-between border-b-4 border-accent p-2">
+      <header className="border-accent flex justify-between border-b-4 p-2">
         <div>
           <img url={comment.imagen} alt="" />
-          <span className="font-semibold text-primary">{comment.alumno}</span>
+          <span className="text-primary font-semibold">{comment.alumno}</span>
         </div>
         <span>{comment.fecha}</span>
       </header>
       <p className="p-2">{comment.comentario}</p>
       <button
         onClick={() => setReplyActive(!replyIsActive)}
-        className="pl-5 font-semibold text-primary"
+        className="text-primary pl-5 font-semibold"
       >
         reply
       </button>
       <button
-        className="pl-5 font-semibold text-primary"
+        className="text-primary pl-5 font-semibold"
         onClick={() => setIsActive(!isActive)}
       >
         comments ({replys.length})
@@ -133,7 +133,7 @@ function Comment({ comment, userId, materialId, courseId }) {
             value={reply}
             className="h-20 w-full rounded-xl border border-gray-400 p-1"
           />
-          <button className="m-1 rounded-lg bg-accent p-2 text-primary">
+          <button className="bg-accent text-primary m-1 rounded-lg p-2">
             Reply
           </button>
         </form>
@@ -216,7 +216,7 @@ function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
           value={comment}
           className="h-20 w-full rounded-xl border border-gray-400 p-1"
         />
-        <button className="m-1 rounded-lg bg-accent p-2 text-primary">
+        <button className="bg-accent text-primary m-1 rounded-lg p-2">
           Comment
         </button>
       </form>
@@ -227,6 +227,7 @@ function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
 }
 
 export default function MaterialPage({ params }) {
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
   const { courseId, moduleId, materialId } = params;
   const [course, setCourse] = useState({});
   const [material, setMaterial] = useState({});
@@ -249,6 +250,12 @@ export default function MaterialPage({ params }) {
     const moduleI = parseInt(moduleId);
     const materialI = parseInt(materialId);
     const currentModule = course.modulos.find(({ id }) => id === moduleI);
+    const lastModule = course.modulos[course.modulos.length - 1];
+    const lastClass = lastModule.clases[lastModule.clases.length - 1];
+    if (materialI === lastClass.id) {
+      setLocation(`/courses`);
+      return;
+    }
 
     if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
       const nextMaterial = currentModule.clases.find(
@@ -265,11 +272,13 @@ export default function MaterialPage({ params }) {
         `/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`
       );
     }
+
+    // }
   }
 
   return (
     <>
-      <section className="flex max-h-[70vh] w-full gap-10 overflow-hidden bg-material text-white lg:p-10">
+      <section className="bg-material flex max-h-[70vh] w-full gap-10 overflow-hidden text-white lg:p-10">
         <div className="hidden max-h-[70vh] w-1/3 flex-col lg:flex">
           <header className="flex max-h-[20vh] flex-col gap-5 pl-5">
             <Link href="/courses" className="flex items-center gap-2">
@@ -293,7 +302,7 @@ export default function MaterialPage({ params }) {
               {material.nombre}
             </h1>
             <button
-              className="w-40 rounded-3xl bg-accent p-2 text-primary"
+              className="bg-accent text-primary w-40 rounded-3xl p-2"
               onClick={() => handleNextMaterial()}
             >
               next class
@@ -305,7 +314,7 @@ export default function MaterialPage({ params }) {
         <header className="h-20 w-full border-b border-gray-200 bg-white px-10 shadow-sm">
           <ul className="flex h-full items-center gap-5">
             <li
-              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              className=" border-accent font-Barlow text-primary text-lg font-semibold hover:border-b-4"
               onClick={() =>
                 setIsActive({ about: true, comments: false, content: false })
               }
@@ -313,7 +322,7 @@ export default function MaterialPage({ params }) {
               About
             </li>
             <li
-              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              className=" border-accent font-Barlow text-primary text-lg font-semibold hover:border-b-4"
               onClick={() =>
                 setIsActive({ about: false, comments: true, content: false })
               }
@@ -321,7 +330,7 @@ export default function MaterialPage({ params }) {
               Comments
             </li>
             <li
-              className=" border-accent font-Barlow text-lg font-semibold text-primary hover:border-b-4"
+              className=" border-accent font-Barlow text-primary text-lg font-semibold hover:border-b-4"
               onClick={() =>
                 setIsActive({ about: false, comments: false, content: true })
               }
