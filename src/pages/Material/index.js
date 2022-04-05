@@ -254,24 +254,27 @@ export default function MaterialPage({ params }) {
     const lastClass = lastModule.clases[lastModule.clases.length - 1];
     if (materialI === lastClass.id) {
       setLocation(`/courses`);
+      console.log("last");
       return;
     }
 
-    if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
-      const nextMaterial = currentModule.clases.find(
-        ({ id }) => id === materialI + 1
-      );
-      setMaterialComplete({ materialId, classNum: material.claseNumero });
-      setLocation(
-        `/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`
-      );
-    } else {
-      const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
-      setMaterialComplete({ materialId, classNum: material.claseNumero });
-      setLocation(
-        `/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`
-      );
-    }
+    console.log("not last");
+
+    // if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
+    //   const nextMaterial = currentModule.clases.find(
+    //     ({ id }) => id === materialI + 1
+    //   );
+    //   setMaterialComplete({ materialId, classNum: material.claseNumero });
+    //   setLocation(
+    //     `/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`
+    //   );
+    // } else {
+    //   const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
+    //   setMaterialComplete({ materialId, classNum: material.claseNumero });
+    //   setLocation(
+    //     `/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`
+    //   );
+    // }
 
     // }
   }
