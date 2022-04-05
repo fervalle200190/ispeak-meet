@@ -13,14 +13,14 @@ function AccordionItem({ course, module, index }) {
   return (
     <li
       key={module.id}
-      className="accordion-item text-primary rounded-xl border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 ease-in-out"
+      className="accordion-item rounded-xl border-gray-200 bg-white p-5 text-primary shadow-sm transition-all duration-300 ease-in-out"
     >
       <div
         className="flex w-full items-center justify-between"
         onClick={() => setActive(!isActive)}
       >
         <div className="flex items-center">
-          <h2 className="accordion-title font-Barlow text-primary mr-5 text-center text-lg font-semibold">
+          <h2 className="accordion-title mr-5 text-center font-Barlow text-lg font-semibold text-primary">
             {module.nombre}
           </h2>
         </div>
@@ -51,8 +51,8 @@ function AccordionItem({ course, module, index }) {
                 <div className="absolute left-0 top-0 z-10 h-full w-full bg-black opacity-10"></div>
                 {clase.completada ? (
                   <>
-                    <div className="bg-accent absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full p-2">
-                      <span className="text-primary mr-1 font-semibold">
+                    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-accent p-2">
+                      <span className="mr-1 font-semibold text-primary">
                         Complete
                       </span>
                       <CourseIcons name="check" />
@@ -64,11 +64,11 @@ function AccordionItem({ course, module, index }) {
               </div>
               <div className="flex w-full justify-between overflow-hidden rounded-b-lg">
                 <div className="flex  p-5 font-semibold">
-                  <h3 className="font-Barlow text-primary font-semibold">
+                  <h3 className="font-Barlow font-semibold text-primary">
                     {clase.nombre}
                   </h3>
                 </div>
-                <div className=" text-primary flex h-28 items-center justify-center border-l border-gray-200 p-3 text-2xl font-semibold">
+                <div className=" flex h-28 items-center justify-center border-l border-gray-200 p-3 text-2xl font-semibold text-primary">
                   <span>{index + 1}</span>
                 </div>
               </div>
@@ -96,7 +96,6 @@ export default function CoursePage({ params }) {
   // const [course, setCourse] = useState({});
   const courses = useContext(CoursesContext) || {};
   const course = courses.filter((course) => course.id === parseInt(id))[0];
-  // console.log(course);
 
   // useEffect(() => {
   //   getCourseById({ id }).then((course) => setCourse(course));
@@ -110,7 +109,7 @@ export default function CoursePage({ params }) {
     <section className="p-5 md:p-10">
       {course ? (
         <>
-          <h1 className="font-Barlow text-primary mr-5 text-2xl font-semibold">
+          <h1 className="mr-5 font-Barlow text-2xl font-semibold text-primary">
             {course.nombre}
           </h1>
           <ol className="accordion flex flex-col gap-3 p-5">

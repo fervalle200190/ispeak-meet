@@ -9,7 +9,6 @@ import CoursesHeader from "components/CoursesHeader";
 export default function CoursesPage() {
   // const [courses, setCourses] = useState([]);
   const courses = useContext(CoursesContext);
-  console.log(courses);
 
   // useEffect(() => {
   //   getCoursesByUserId().then((courses) => setMyCourses(courses));

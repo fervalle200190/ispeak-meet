@@ -7,7 +7,6 @@ const ContentReview = () => {};
 
 const CourseCard = ({ title, courses }) => {
   const [isActive, setIsActive] = useState(false);
-  console.log(courses);
   return (
     <div className="flex h-fit w-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm md:max-w-fit">
       <div onClick={() => setIsActive(!isActive)}>
@@ -40,7 +39,6 @@ const CourseCard = ({ title, courses }) => {
 
 const LearningCard = ({ title, courses }) => {
   const [isActive, setIsActive] = useState(false);
-  console.log(courses);
   return (
     <>
       <div className="flex h-fit w-full flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm md:max-w-fit">

@@ -11,7 +11,6 @@ const getContinueWatching = (courses) => {
       const moduleId = module.id;
       for (let material of module.clases) {
         if (!material.completada) {
-          console.log(material);
           return {
             nombre: material.nombre,
             thumbnail: material.thumbnails,

@@ -57,8 +57,41 @@ function Replys({ reply }) {
   );
 }
 
-function Comment({ comment }) {
+function Comment({ comment, userId, materialId, courseId }) {
   const [isActive, setIsActive] = useState(false);
+  const [replyIsActive, setReplyActive] = useState(false);
+  const [replys, setReplys] = useState(comment.respuestas);
+  const [reply, setReply] = useState("");
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
+
+  const handleChange = (event) => {
+    setReply(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (comment) {
+      const data = {
+        UsuarioId: userId,
+        MaterialId: materialId,
+        CursoId: courseId,
+        Comentario: reply,
+        ComentarioId: comment.id,
+      };
+      const update = [...replys];
+      update.push({
+        id: 999999,
+        alumno: user.nombre,
+        fecha: "",
+        respuestas: [],
+        comentario: reply,
+      });
+      setReplys(update);
+      setIsActive(true);
+      postComment({ comment: data });
+    }
+  };
+
   return (
     <div
       key={comment.id}
@@ -72,17 +105,38 @@ function Comment({ comment }) {
         <span>{comment.fecha}</span>
       </header>
       <p className="p-2">{comment.comentario}</p>
-      <button className="pl-5 font-semibold text-primary">reply</button>
+      <button
+        onClick={() => setReplyActive(!replyIsActive)}
+        className="pl-5 font-semibold text-primary"
+      >
+        reply
+      </button>
       <button
         className="pl-5 font-semibold text-primary"
         onClick={() => setIsActive(!isActive)}
       >
-        comments ({comment.respuestas.length})
+        comments ({replys.length})
       </button>
       {isActive ? (
-        comment.respuestas.map((reply) => (
-          <Replys key={reply.id} reply={reply} />
-        ))
+        replys.map((reply) => <Replys key={reply.id} reply={reply} />)
+      ) : (
+        <></>
+      )}
+      {replyIsActive ? (
+        <form
+          onSubmit={handleSubmit}
+          className="mt-2 w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+        >
+          <textarea
+            onChange={handleChange}
+            type="textarea"
+            value={reply}
+            className="h-20 w-full rounded-xl border border-gray-400 p-1"
+          />
+          <button className="m-1 rounded-lg bg-accent p-2 text-primary">
+            Reply
+          </button>
+        </form>
       ) : (
         <></>
       )}
@@ -90,16 +144,24 @@ function Comment({ comment }) {
   );
 }
 
-function CommentsList({ comments = [] }) {
+function CommentsList({ comments = [], userId, materialId, courseId }) {
   return comments.map((comment) => {
-    return <Comment key={comment.id} comment={comment} />;
+    return (
+      <Comment
+        key={comment.id}
+        comment={comment}
+        userId={userId}
+        materialId={materialId}
+        courseId={courseId}
+      />
+    );
   });
 }
 
 function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
-  const userId = JSON.parse(window.localStorage.getItem("loggedAppUser")).id;
+  const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
 
   const handleChange = (event) => {
     setComment(event.target.value);
@@ -109,13 +171,21 @@ function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
     event.preventDefault();
     if (comment) {
       const data = {
-        UsuarioId: userId.toString(),
-        MaterialId: materialId.toString(),
-        CursoId: courseId.toString(),
+        UsuarioId: user.id,
+        MaterialId: materialId,
+        CursoId: courseId,
         Comentario: comment,
-        CommentarioId: 0,
+        ComentarioId: 0,
       };
-      console.log(JSON.stringify(data));
+      const update = [...comments];
+      update.push({
+        id: 999999,
+        alumno: user.nombre,
+        fecha: "",
+        respuestas: [],
+        comentario: comment,
+      });
+      setComments(update);
       postComment({ comment: data });
     }
   };
@@ -129,7 +199,12 @@ function MaterialCommentsSection({ courseId, materialId, isActive = false }) {
 
   return isActive ? (
     <div className="flex w-full flex-col items-center gap-5 bg-gray-100 p-5 md:p-10">
-      <CommentsList comments={comments} />
+      <CommentsList
+        comments={comments}
+        courseId={courseId}
+        materialId={materialId}
+        userId={user.id}
+      />
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
