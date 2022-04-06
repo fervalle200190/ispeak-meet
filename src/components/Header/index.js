@@ -24,7 +24,7 @@ export default function Header() {
           </button>
           <Link
             href="/"
-            className=" text-4xl font-light text-primary md:hidden"
+            className=" text-primary text-4xl font-light md:hidden"
           >
             i<span className="text-accent">.</span>speak
           </Link>
@@ -34,13 +34,13 @@ export default function Header() {
           <div className="flex gap-5">
             <div className="flex items-center">
               <HeaderIcons name="profile" />
-              <span className="hidden font-medium text-primary md:inline">
+              <span className="text-primary hidden font-medium md:inline">
                 {username}
               </span>
             </div>
-            {/* <button onClick={handleLogout} className="text-primary">
-            Logout
-          </button> */}
+            <button onClick={handleLogout} className="text-primary">
+              Logout
+            </button>
           </div>
         </div>
       </header>
