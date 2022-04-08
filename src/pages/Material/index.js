@@ -250,33 +250,42 @@ export default function MaterialPage({ params }) {
     const moduleI = parseInt(moduleId);
     const materialI = parseInt(materialId);
     const currentModule = course.modulos.find(({ id }) => id === moduleI);
+    const currentMaterial = currentModule.clases.find(({ id }) => id === materialI);
     const lastModule = course.modulos[course.modulos.length - 1];
     const lastClass = lastModule.clases[lastModule.clases.length - 1];
     if (materialI === lastClass.id) {
       setLocation(`/courses`);
-      console.log("last");
+      console.log(material);
       return;
     }
+    const currentModuleIndex = course.modulos.findIndex(module => module.id === moduleI);
+    const currentMaterialIndex = currentModule.clases.findIndex(material => material.id === materialI);
 
-    console.log("not last");
 
-    // if (currentModule.clases.some(({ id }) => id === materialI + 1)) {
-    //   const nextMaterial = currentModule.clases.find(
-    //     ({ id }) => id === materialI + 1
-    //   );
-    //   setMaterialComplete({ materialId, classNum: material.claseNumero });
-    //   setLocation(
-    //     `/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`
-    //   );
-    // } else {
-    //   const nextModule = course.modulos.find(({ id }) => id === moduleI + 1);
-    //   setMaterialComplete({ materialId, classNum: material.claseNumero });
-    //   setLocation(
-    //     `/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`
-    //   );
-    // }
 
-    // }
+    if(currentMaterial.completada) {
+
+      if (currentMaterialIndex === currentModule.clases.length - 1) {
+        const nextModule = course.modulos[currentModuleIndex + 1];
+        setLocation(`/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`);
+      } else {
+        const nextMaterial = currentModule.clases[currentMaterialIndex + 1];
+        setLocation(`/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`);
+      };
+
+    } else {
+     if (currentMaterialIndex === currentModule.clases.length - 1) {
+        const nextModule = course.modulos[currentModuleIndex + 1];
+        setMaterialComplete({ materialId, classNum: material.claseNumero });
+        setLocation(`/courses/${courseId}/module/${nextModule.id}/material/${nextModule.clases[0].id}`);
+      } else {
+        const nextMaterial = currentModule.clases[currentMaterialIndex + 1];
+        setMaterialComplete({ materialId, classNum: material.claseNumero });
+        setLocation(`/courses/${courseId}/module/${moduleId}/material/${nextMaterial.id}`);
+      };
+
+    }
+    
   }
 
   return (

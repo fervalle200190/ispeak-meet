@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "wouter";
 
 import HeaderIcons from "components/HeaderIcons";
