@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import getCountries from "services/getCountries"
 
 export default function ExternalRegisterPage() {
+  const [countries, setCountries] = useState([]);
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [phone, setPhone] = useState("");
@@ -18,6 +20,10 @@ export default function ExternalRegisterPage() {
   const handleOccupation = ({ target }) => setOccupation(target.value);
   const handleEmail = ({ target }) => setEmail(target.value);
   const handlePassword = ({ target }) => setPassword(target.value);
+
+  useEffect(() => {
+    getCountries().then(response => setCountries(response));
+  }, [])
 
   return (
     <>
@@ -57,13 +63,13 @@ export default function ExternalRegisterPage() {
               onChange={handlePhone}
             />
             <label className="font-medium">Pais</label>
-            <input
+            <select
               className="min-h-[2rem] rounded-sm border border-gray-200 px-2"
               type="text"
               name="country"
               value={country}
               onChange={handleCountry}
-            />
+            ></select>
             <label className="font-medium">Ciudad</label>
             <input
               className="min-h-[2rem] rounded-sm border border-gray-200 px-2"
