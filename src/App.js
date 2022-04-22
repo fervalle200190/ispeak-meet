@@ -13,6 +13,7 @@ import ProfessorCoursesPage from "pages/ProfessorCourses";
 import AssistancePage from "pages/Assistance";
 import FollowUpPage from "pages/FollowUp";
 import ProgressPage from "pages/Progress";
+import ExternalRegisterPage from "pages/ExternalRegister";
 
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
@@ -86,7 +87,10 @@ function App() {
   return (
     <>
       {!user ? (
-        <Route component={LoginPage} path="/" />
+        <>
+          <Route component={LoginPage} path="/" />
+          <Route component={ExternalRegisterPage} path="/register/:courseid" />
+        </>
       ) : (
         <SideBarContext.Provider value={{ isOpen, setIsOpen }}>
           {user.rol === "Profesor" ? (
