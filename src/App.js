@@ -9,6 +9,8 @@ import MaterialPage from "./pages/Material";
 import AdditionalMaterialPage from "./pages/AdditionalMaterial";
 import ProfilePage from "pages/Profile";
 import StudentsPage from "pages/Students";
+import {MyCommunityPage} from "pages/MyCommunity";
+import MyTopicPage from "pages/MyTopic";
 import ProfessorCoursesPage from "pages/ProfessorCourses";
 import AssistancePage from "pages/Assistance";
 import FollowUpPage from "pages/FollowUp";
@@ -22,6 +24,7 @@ import "./App.css";
 import { SideBarContext } from "context/sideBarContext";
 import { CoursesContext } from "context/coursesContext";
 import getAllCoursesByUser from "services/getAllCoursesByUser";
+import JitsiMeetPage from "pages/JitsiMeet";
 
 const RenderProfessorView = () => {
   const user = JSON.parse(window.localStorage.getItem("loggedAppUser"));
@@ -36,6 +39,10 @@ const RenderProfessorView = () => {
         <Route component={AssistancePage} path="/assistance" />
         <Route component={FollowUpPage} path="/followup" />
         <Route component={ProgressPage} path="/progress" />
+        <Route component={MyCommunityPage} path="/community" /> 
+        <Route component={MyTopicPage} path="/community/:topicId" />
+        <Route component={JitsiMeetPage} path="/JitsiMeet/:jitsiId" />  
+         
       </main>
     </div>
   );
@@ -65,6 +72,11 @@ const RenderStudentView = () => {
             />
             <Route component={AdditionalMaterialPage} path="/refuerzo" />
             <Route component={ProfilePage} path="/profile" />
+            <Route component={MyCommunityPage} path="/community" />
+            <Route component={MyTopicPage} path="/community/:topicId" />
+            <Route component={JitsiMeetPage} path="/JitsiMeet/:jitsiId" />
+            
+
           </main>
         </div>
       </CoursesContext.Provider>
@@ -87,7 +99,7 @@ function App() {
   return (
     <>
       {!user ? (
-        <>
+        <> 
           <Route component={LoginPage} path="/" />
           <Route component={ExternalRegisterPage} path="/register/:courseid" />
         </>

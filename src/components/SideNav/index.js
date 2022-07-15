@@ -21,13 +21,12 @@ const NAV_ITEMS = {
       icon: <SideNavIcons name="material" />,
       url: "/refuerzo",
     },
-    // {
-    //   title: "Community",
-    //   icon: (
-    //     <SideNavIcons name='community' />
-    //   ),
-    //   url: "",
-    // },
+    {
+      id: 6,
+      title: "My Community",
+      icon: <SideNavIcons name="community" />,
+      url: "/community",
+    },
     // {
     //   title: "Matches",
     //   icon: (
@@ -78,6 +77,12 @@ const NAV_ITEMS = {
       title: "Progress",
       icon: <SideNavIcons name="progress" />,
       url: "/progress",
+    },
+    {
+      id: 6,
+      title: "My Community",
+      icon: <SideNavIcons name="community" />,
+      url: "/community",
     },
   ],
 };
